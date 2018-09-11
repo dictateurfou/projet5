@@ -1,15 +1,15 @@
 <?php
-		require('src/Autoloader/Psr4AutoloaderClass.php');
- 		$loader = new \Autoloader\Psr4AutoloaderClass;
- 
-      // register the autoloader
-      $loader->register();
+	/* autoloader */
 
-       // register the base directories for the namespace prefix
-      /* $loader->addNamespace('Blog\FrontEnd', '/src/Classes');
-       $loader->addNamespace('Blog\Administration', '/src/FrontEnd/Classes');*/
-       $loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');
-       new \Blog\Administration\Test;
+	require('src/Autoloader/Psr4AutoloaderClass.php');
+	$loader = new \Autoloader\Psr4AutoloaderClass;
+  	$loader->register();
+
+	/*$loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');*/
+	$loader->addNamespace('Route', 'src/Route/');
+
+   /*new \Blog\Administration\Test;*/
+   new \Route\Route;
 ?>
 
 <!DOCTYPE html>
