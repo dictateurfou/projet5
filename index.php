@@ -1,3 +1,17 @@
+<?php
+		require('src/Autoloader/Psr4AutoloaderClass.php');
+ 		$loader = new \Autoloader\Psr4AutoloaderClass;
+ 
+      // register the autoloader
+      $loader->register();
+
+       // register the base directories for the namespace prefix
+      /* $loader->addNamespace('Blog\FrontEnd', '/src/Classes');
+       $loader->addNamespace('Blog\Administration', '/src/FrontEnd/Classes');*/
+       $loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');
+       new \Blog\Administration\Test;
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
