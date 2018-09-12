@@ -25,11 +25,23 @@ class Router
 
 	public function checkApp(){
 		$i = 0;
+		$uriFindNb = 0;
+		$uriFind = false;
 		while(count($this->app) > $i){
-			var_dump(explode("/",$this->app[$i]["name"]));
-			if($this->app[$i]["name"] == $this->HTTPRequest->requestURI()){
-				var_dump(explode("/", $this->app[$i]["name"]));
-
+			$uri = explode("/",$this->HTTPRequest->requestURI());
+			$app = explode("/",$this->app[$i]["name"]);
+			if($app === $uri){
+				var_dump("default route break boucle and send result (a faire)");
+				$uriFind = false;
+				break;
+			}
+			else{
+ 				if(strpos($this->HTTPRequest->requestURI(),$this->app[$i]["name"]) !== false){
+ 					if($uriFindNb < count($app)){
+ 						var_dump("true");
+ 					}
+				    
+				}
 			}
 			$i++;
 		}
