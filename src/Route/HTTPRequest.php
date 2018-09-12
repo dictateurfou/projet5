@@ -41,6 +41,6 @@ class HTTPRequest
 
   public function requestURI()
   {
-    return ltrim($_SERVER['REQUEST_URI'],"/");
+    return trim($_SERVER['REQUEST_URI'],"/");
   }
 }
