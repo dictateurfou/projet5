@@ -1,5 +1,6 @@
 <?php
 	/* autoloader */
+	/*const DEFAULT_APP = 'Blog';*/
 
 	require('src/Autoloader/Psr4AutoloaderClass.php');
 	$loader = new \Autoloader\Psr4AutoloaderClass;
@@ -8,8 +9,16 @@
 	/*$loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');*/
 	$loader->addNamespace('Route', 'src/Route/');
 
-   /*new \Blog\Administration\Test;*/
-   new \Route\Route;
+	/*new \Blog\Administration\Test;*/
+	$router = new \Route\Router;
+	$controller = new \Route\Controller;
+	$controller->control();
+	var_dump($router->getHTTPRequest()->requestURI());
+
+	$router->addApp("Blog","Blog/FrontEnd");
+	$router->addApp("Blog/Admin","Blog/Administration");
+	$router->checkApp();
+
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +26,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>acceuil</title>
-		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 	</head>
 
 	<body>
@@ -34,7 +43,7 @@
 
 		<section id="left-bar">
 			<div id="circle-img">
-				<img id="photo" src="assets/img/photo.png"/>
+				<img id="photo" src="/assets/img/photo.png"/>
 			</div>
 
 			<h2 id="name">Hervy Steven</h2>
