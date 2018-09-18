@@ -1,4 +1,7 @@
 <?php
+
+namespace Controller
+
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false);
 $controller->addAction('connection',false);

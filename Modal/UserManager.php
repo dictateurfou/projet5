@@ -1,4 +1,5 @@
 <?php
+namespace Modal;
 
 class UserManager extends Manager{
 

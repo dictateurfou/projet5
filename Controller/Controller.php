@@ -1,4 +1,5 @@
 <?php
+namespace Controller;
 
 class Controller{
 
@@ -7,18 +8,26 @@ class Controller{
 	private $route = [];
 	private $action = false;
 	
-	const EXTENSIONCLASSE = '.class.php';
+	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.phtml';
 	const DEFAULTPAGE = 'default';
 
 	public function control(){
+		$find = false;
 		$i = 0;
 		while(count($this->route) > $i){
+			/*cherche si ?route es spécifier en rapport avec les routes principals*/
 			if(array_key_exists($this->route[$i]['name'],$_GET)){
 				$this->vue = $this->route[$i]['name']."/";
 				$this->controller = "Controller".ucfirst($this->route[$i]['name']);
+				$find = true;
 			}
 			$i++;
+		}
+
+		/*si aucune route trouver on redirige vers la route par defaut */
+		if($find == false){
+			
 		}
 
 		/*$this->checkAction();*/

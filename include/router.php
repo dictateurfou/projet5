@@ -5,5 +5,5 @@
 $controller->addRoute("account");
 /*fin route*/
 $controller->control();
-include "controller/".$controller->getController();
+include "Controller/".$controller->getController();
 $result = $controller->checkAction();
