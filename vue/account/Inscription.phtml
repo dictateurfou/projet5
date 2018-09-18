@@ -1,0 +1,17 @@
+<form method="post">
+	<input type="text" placeholder="pseudo" name="pseudo"/>
+	<input type="email" placeholder="mail" name="mail"/>
+	<input type="password" placeholder="pass" name="pass"/>
+	<input type="submit" />
+</form>
+
+<?php
+	if($result !== false){
+		$i = 0;
+		while(count($result) > $i){
+			echo $result[$i];
+			$i++;
+		}
+	}
+
+?>
