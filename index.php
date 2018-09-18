@@ -32,7 +32,7 @@
 		<header>
 			<nav id="menu">
 				<a href="#">Acceuil</a>
-				<a href="#">Blog</a>
+				<a href="?post&action=viewAll">Blog</a>
 				<a href="#">Connexion</a>
 			</nav>
 		</header>
