@@ -28,7 +28,7 @@ class Controller{
 
 		/*si aucune route trouver on redirige vers la route par defaut */
 		if($find == false){
-			header('Location: /index.php?'.self::DEFAULTPAGE.'&?action='.self::DEFAULTACTION);
+			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
 		}
 
 		/*$this->checkAction();*/
@@ -48,8 +48,9 @@ class Controller{
 		$i = 0;
 		$className = "\Controller\\".$this->controller;
 		$methodName = "defaut";
+		/*var_dump($this->action);*/
 		if(array_key_exists('action',$_GET)){
-			while($i < count($this->action)){		
+			while($i < count($this->action)){
 				if($_GET["action"] == $this->action[$i]["name"]){
 					$className = $this->controller;
 					$methodName = $this->action[$i]["name"];
@@ -61,9 +62,11 @@ class Controller{
 		}
 
 		if($find == false){
-			$this->vue = self::DEFAULTPAGE;
+			/*si aucune action ne correspond a la route on redirige vers la route par défaut */
+			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
 		} 
-		return $className::$methodName();
+
+		return "\Controller\\".$className::$methodName();
 	}
 
 	public function addRoute($name){

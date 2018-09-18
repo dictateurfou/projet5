@@ -2,7 +2,7 @@
 
 pre.xdebug-var-dump{
 	width:80%;
-	position:absolute;
+	float:right;
 	right:1em;
 }
 
@@ -68,3 +68,10 @@ nav#menu a{
 }
 
 /**/
+
+#content{
+	width:85%;
+	float:right;
+	margin-top:1em;
+	right:0em;
+}

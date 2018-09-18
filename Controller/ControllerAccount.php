@@ -1,7 +1,5 @@
 <?php
 
-namespace Controller;
-
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false);
 $controller->addAction('connection',false);
@@ -9,7 +7,7 @@ $controller->addAction('connection',false);
 class ControllerAccount{
 
 	public static function defaut(){
-		echo var_dump("oki");
+		/*echo var_dump("oki");*/
 	}
 
 	/*return false si une érreure c'est produit*/
@@ -57,7 +55,7 @@ class ControllerAccount{
 	}
 
 	public static function connection(){
-		echo var_dump("connection");
+		/*echo var_dump("connection");*/
 	}
 
 }

@@ -50,7 +50,7 @@
 		</section>
 
 		<section id="content">
-
+			<?php include "View/".$controller->getvue(); ?>
 		</section>
 	</body>
 </html>
