@@ -25,6 +25,6 @@ class UserManager extends Manager{
 		else{
 			$message = "<div class='erreur'>ce nom dutilisateur es déja pris veuillez en choisir un autre</div>";
 		}
-		return $message;	
+		return $message;
 	}
 }

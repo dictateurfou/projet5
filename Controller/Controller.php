@@ -10,7 +10,8 @@ class Controller{
 	
 	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.phtml';
-	const DEFAULTPAGE = 'default';
+	const DEFAULTPAGE = 'account';
+	const DEFAULTACTION = 'connection';
 
 	public function control(){
 		$find = false;
@@ -27,7 +28,7 @@ class Controller{
 
 		/*si aucune route trouver on redirige vers la route par defaut */
 		if($find == false){
-			
+			header('Location: /index.php?'.self::DEFAULTPAGE.'&?action='.self::DEFAULTACTION);
 		}
 
 		/*$this->checkAction();*/
@@ -45,7 +46,7 @@ class Controller{
 	public function checkAction(){
 		$find = false;
 		$i = 0;
-		$className = $this->controller;
+		$className = "\Controller\\".$this->controller;
 		$methodName = "defaut";
 		if(array_key_exists('action',$_GET)){
 			while($i < count($this->action)){		

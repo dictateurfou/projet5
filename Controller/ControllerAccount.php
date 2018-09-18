@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller
+namespace Controller;
 
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false);
