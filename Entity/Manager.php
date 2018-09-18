@@ -1,9 +1,9 @@
 <?php
 namespace Entity;
-
+use PDO;
 abstract class Manager{
 
-	const DSN = 'mysql:dbname=blog;host=localhost';
+	const DSN = 'mysql:dbname=projet5;host=localhost';
 	const USER = 'root';
 	const PASS = '';
 
