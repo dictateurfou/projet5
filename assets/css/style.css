@@ -67,7 +67,7 @@ nav#menu a{
 	font-size:1.5em;
 }
 
-/**/
+/*post-list*/
 
 #content{
 	width:85%;
@@ -110,3 +110,20 @@ nav#menu a{
 	color:#fff;
 }
 
+/**/
+
+
+#one-post{
+	width:80%;
+	margin:0 auto;
+	text-align:center;
+	background-color:green;
+}
+
+#one-post h2{
+	font-size:4em;
+}
+
+#one-post img{
+	width:25%;
+}

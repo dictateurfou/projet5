@@ -1,0 +1,10 @@
+<div id="one-post">
+	<?php
+	if($result !== false){
+		echo "<h2>".$result->getTitle()."</h2>";
+		echo "<img src='assets/img/".$result->getImage()."' />";
+		echo "<p>".$result->getContent()."</p>";
+		echo "<p>".$result->getCreatedAt()."</p>";
+	}
+	?>
+</div>

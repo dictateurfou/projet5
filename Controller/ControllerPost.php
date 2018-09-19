@@ -17,7 +17,6 @@ class ControllerPost{
  		}
  		else{
  			/*créer une redirection page 404*/
- 			return false;
  		}
  	}
 
