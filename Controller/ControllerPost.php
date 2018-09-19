@@ -2,17 +2,23 @@
 
 /*LOAD ROUTE ACTION*/
 $controller->addAction('viewAll',false);
-$controller->addAction('post',["id"]);
+$controller->addAction('view',["id"]);
 
 class ControllerPost{
  	public static function viewAll(){
 		$userManager = new \Modal\PostManager();
-		$userManager->viewAll();
  		return $userManager->viewAll();
  	}
 
- 	public function post($id){
- 		$userManager = new \Modal\PostManager();
+ 	public static function view(){
+ 		if(array_key_exists('id', $_GET)){
+ 			$userManager = new \Modal\PostManager();
+ 			return $userManager->view($_GET['id']);
+ 		}
+ 		else{
+ 			/*créer une redirection page 404*/
+ 			return false;
+ 		}
  	}
 
 }
