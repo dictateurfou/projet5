@@ -72,17 +72,26 @@ nav#menu a{
 #content{
 	width:85%;
 	float:right;
-	margin-top:1em;
+	margin-top:2em;
 	right:0em;
+	color:#fff;
 }
 
 
 #post-list{
 	width:80%;
+	margin:0 auto;
+
+}
+
+#post-list h2{
+	font-size:4em;
+	text-align:center;
 }
 
 #post-list li{
-	margin:0 auto;
+	overflow: hidden;
+	background-color:blue;
 }
 
 #post-list .img-post{

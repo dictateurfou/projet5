@@ -1,29 +1,20 @@
-<ul>
+<ul id="post-list">
 <?php
 
 
 $i = 0;
 while($i < count($result)){
 	echo "<li>";
-
+	echo "<img class='img-post' src='assets/img/".$result[$i]->getImage()."' />";
+	echo "<div class='content-post'>";
+	echo "<h2>".$result[$i]->getTitle()."</h2>";
+	echo "<p>".$result[$i]->getContent()."</p>";
+	echo "<p class='date-post'>".$result[$i]->getCreatedAt()."</p>";
+	echo "</div>";
 	echo "</li>";
 	$i++;
 }
 
 
 ?>
-</ul>
-
-<ul id="post-list">
-	<li>
-
-			<img class="img-post" src="assets/img/photo.png" />
-		
-		<div class="content-post">
-			<h2>titre</h2>
-			<p>Verum ad istam omnem orationem brevis est defensio. Nam quoad aetas M. Caeli dare potuit isti suspicioni locum, fuit primum ipsius pudore, deinde etiam patris diligentia disciplinaque munita. Qui ut huic virilem togam deditšnihil dicam hoc loco de me; tantum sit, quantum vos existimatis; hoc dicam, hunc a patre continuo ad me esse deductum; nemo hunc M. Caelium in illo aetatis flore vidit nisi aut cum patre aut mecum aut in M. Crassi castissima domo, cum artibus honestissimis erudiretur.
-			</p>
-			<p class="date-post">date</p>
-		</div>
-	</li>
 </ul>
