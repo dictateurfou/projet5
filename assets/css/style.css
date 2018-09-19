@@ -75,3 +75,26 @@ nav#menu a{
 	margin-top:1em;
 	right:0em;
 }
+
+
+#post-list{
+	width:80%;
+}
+
+#post-list li{
+	margin:0 auto;
+}
+
+#post-list .img-post{
+	width:20%;
+	float:left;
+	left:0em;
+}
+
+#post-list .content-post{
+	width:70%;
+	float:left;
+	left:0em;
+}
+
+

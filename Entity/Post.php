@@ -12,6 +12,6 @@ class Post
 	private $createdAt;
 	private $editedAt;
 
-
+	
 
 }

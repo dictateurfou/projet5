@@ -8,7 +8,6 @@ class ControllerPost{
  	public static function viewAll(){
 		$userManager = new \Modal\PostManager();
 		$userManager->viewAll();
-		var_dump($userManager->viewAll());
  		return $userManager->viewAll();
  	}
 
