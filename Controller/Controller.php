@@ -66,7 +66,8 @@ class Controller{
 			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
 		} 
 
-		return "\Controller\\".$className::$methodName();
+
+		return $className::$methodName();
 	}
 
 	public function addRoute($name){

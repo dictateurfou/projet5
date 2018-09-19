@@ -13,7 +13,7 @@ class PostManager extends Manager{
 		$stmt->execute();
 		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\Post');
 		$post = $stmt->fetchAll();
-		return $post;
+		return $post[0];
 				
 	}
 }
