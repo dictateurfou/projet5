@@ -16,10 +16,9 @@
 	/*$entity = new \Entity\UserManager;*/
 	require_once("vendor/autoload.php");
 
-	$loader2 = new \Twig_Loader_Filesystem(__DIR__.'/View');
-	$twig = new \Twig_Environment($loader2);
+	$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/View');
+	$twig = new \Twig_Environment($loaderTwig);
 
-	/*echo $twig->render('demo.twig', ['name' => 'zhinyz']);*/
 
 ?>
 
@@ -85,7 +84,7 @@
 	      </div>
 	    </header>
 
-		<section id="left-bar">
+		<section id="left-bar" style="display:none">
 			<div id="circle-img">
 				<img id="photo" src="/assets/img/photo.png"/>
 			</div>
@@ -98,7 +97,7 @@
 		</section>
 
 		<section id="content">
-			<?php include "View/".$controller->getvue(); ?>
+			<?php echo $twig->render($controller->getvue(), array('result' => $result)); ?>
 		</section>
 
 		  <!-- Bootstrap core JavaScript -->

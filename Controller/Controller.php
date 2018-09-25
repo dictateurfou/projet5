@@ -9,7 +9,7 @@ class Controller{
 	private $action = false;
 	
 	const EXTENSIONCLASSE = '.php';
-	const EXTENSIONVIEW = '.phtml';
+	const EXTENSIONVIEW = '.twig';
 	const DEFAULTPAGE = 'account';
 	const DEFAULTACTION = 'connection';
 
