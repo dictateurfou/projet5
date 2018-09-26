@@ -5,13 +5,9 @@
 	<input type="submit" />
 </form>
 
-<?php
-	if($result !== false){
-		$i = 0;
-		while(count($result) > $i){
-			echo $result[$i];
-			$i++;
-		}
-	}
+{% if error != false %}
+    {% for err in error %}
+    	<li>{{err}}</li>
+	{% endfor %}
+{% endif %}
 
-?>
