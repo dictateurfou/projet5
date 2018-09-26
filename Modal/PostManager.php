@@ -26,4 +26,16 @@ class PostManager extends Manager{
 		$post = $stmt->fetch();
 		return $post;
 	}
+
+	public function addPost($title,$image,$content){
+		$cnx = $this->cnx();
+		$date = date('Y-m-d h:m:s');
+		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,'test',:date,:date)");
+
+		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
+		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
+		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+		$stmt->bindParam(':date',$date);
+		$stmt->execute();
+	}
 }
