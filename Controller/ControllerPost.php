@@ -22,17 +22,20 @@ class ControllerPost{
  	}
 
  	public static function addPost(){
- 		$image = new \Entity\File($_FILES['image']);
- 		var_dump($image->checkValidExtension(array('jpg','jpeg','png')));
- 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
- 			var_dump("passe2");
- 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
- 			$target = 'post/'.$name;
- 			$image->changeFolder($target);
- 			$postManager = new \Modal\PostManager();
- 			$postManager->addPost($_POST['title'],$target,$_POST['content']);
+ 		if(array_key_exists('image', $_FILES)){
+ 			$image = new \Entity\File($_FILES['image']);
+ 		
 
- 		}
+	 		var_dump($image->checkValidExtension(array('jpg','jpeg','png')));
+	 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
+	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
+	 			$target = 'post/'.$name;
+	 			$image->changeFolder($target);
+	 			$postManager = new \Modal\PostManager();
+	 			$postManager->addPost($_POST['title'],$target,$_POST['content']);
+
+	 		}
+	 	}
  	}
 
 }
