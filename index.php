@@ -14,11 +14,12 @@
 
 	/*new \Blog\Administration\Test;*/
 	/*$entity = new \Entity\UserManager;*/
-	require_once("vendor/autoload.php");
 
-	$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/View');
+	/*$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/View');
 	$twig = new \Twig_Environment($loaderTwig);
+	
 
+	$render = $twig->render($controller->getvue(), $result);*/
 
 ?>
 
@@ -97,7 +98,10 @@
 		</section>
 
 		<section id="content">
-			<?php echo $twig->render($controller->getvue(), $result); ?>
+
+			<?php
+
+			 echo $controller->render(); ?>
 		</section>
 
 		    <!-- Footer -->

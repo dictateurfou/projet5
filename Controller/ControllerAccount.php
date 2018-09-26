@@ -1,5 +1,6 @@
 <?php
 
+
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false);
 $controller->addAction('connection',false);
@@ -51,7 +52,7 @@ class ControllerAccount{
 					$userManager->addUser($pseudo,$mail,$pass);
 				}
 		}
-		return $error;
+		return ["error" => $error];
 	}
 
 	public static function connection(){

@@ -1,5 +1,7 @@
 <?php
 namespace Controller;
+/*for twig component*/
+require_once("vendor/autoload.php");
 
 class Controller{
 
@@ -43,7 +45,7 @@ class Controller{
 	}
 
 
-	public function checkAction(){
+	public function render(){
 		$find = false;
 		$i = 0;
 		$className = "\Controller\\".$this->controller;
@@ -65,9 +67,16 @@ class Controller{
 			/*si aucune action ne correspond a la route on redirige vers la route par défaut */
 			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
 		} 
-
-
-		return $className::$methodName();
+		
+		$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/../View');
+		$twig = new \Twig_Environment($loaderTwig);
+		$result = $className::$methodName();
+		if($result != null){
+			return $twig->render($this->vue.self::EXTENSIONVIEW, $result);
+		}
+		else{
+			return $twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
+		}
 	}
 
 	public function addRoute($name){
