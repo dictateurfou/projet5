@@ -10,11 +10,14 @@ class File
 	private $tmp_name;
 	private $error;
 	private $size;
+	const UPLOADFOLDER = __DIR__."/../assets/img/";
 
-	/*construct with $_Files['names']*/
+	/*only construct with $_Files['names']*/
 	function __construct($array){
-		foreach($array as $key => $value){
-			$this->$key = $value;
+		if($array !== null){
+			foreach($array as $key => $value){
+				$this->$key = $value;
+			}
 		}
 	}
 
@@ -39,7 +42,23 @@ class File
 	}
 
 	public function checkType(){
-		strrchr($other_filename, '.' );
+		return strtolower(substr(strrchr($this->name,'.'),1));
+	}
+
+	public function checkValidExtension($array){
+		$valid = false;
+		foreach ($array as $key => $value) {
+			if($value === $this->checkType()){
+				$valid = true;
+				break;
+			}
+		}
+		return $valid;
+	}
+
+	public function changeFolder($target){
+		move_uploaded_file($this->getTmpName(),self::UPLOADFOLDER.$target);
+		var_dump(self::UPLOADFOLDER.$target);
 	}
 
 

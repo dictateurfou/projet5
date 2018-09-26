@@ -22,12 +22,10 @@ class ControllerPost{
  	}
 
  	public static function addPost(){
- 		var_dump($_POST);
- 		var_dump($_FILES['image']);
  		$image = new \Entity\File($_FILES['image']);
- 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0){
- 			$_FILES['image']['name'];
- 			var_dump("aucune erreure");
+ 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
+ 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
+ 			$image->changeFolder('post/'.$name);
  		}
  	}
 
