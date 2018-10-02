@@ -4,7 +4,7 @@
 $controller->addAction('viewAll',false);
 $controller->addAction('view',["id"]);
 $controller->addAction('addPost',false);
-$controller->addAction('editPost',false);
+$controller->addAction('edit',false);
 
 class ControllerPost{
  	public static function viewAll(){
@@ -39,15 +39,33 @@ class ControllerPost{
 	 	}
  	}
 
- 	public static function editPost(){
+ 	public static function edit(){
  		$postManager = new \Modal\PostManager();
- 		if(!empty($_GET['id'])){
- 			if(is_int($_GET['id'])){
- 				return ["content" => $postManager->view($_GET['id'])];
+
+
+ 		if(!empty($_POST['title']) && !empty($_POST['content']) && array_key_exists('image', $_FILES)){
+ 			var_dump("passe");
+ 		}
+ 		elseif(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0){
+ 			$image = new \Entity\File($_FILES['image']);
+ 			if($image->checkValidExtension(array('jpg','jpeg','png'))){
+ 				
  			}
+ 			
  		}
  		else{
-
+ 			if(!empty($_GET['id'])){
+ 				$article = $postManager->view($_GET['id']);
+ 				if($article !== false){
+ 					return ["article" => $article];
+ 				}
+ 				else{
+ 					/* redirect post inconnu */
+ 				}
+ 			}
+ 			else{
+ 				/* redirect */
+ 			}
  		}
  	}
 
