@@ -4,6 +4,7 @@
 $controller->addAction('viewAll',false);
 $controller->addAction('view',["id"]);
 $controller->addAction('addPost',false);
+$controller->addAction('editPost',false);
 
 class ControllerPost{
  	public static function viewAll(){
@@ -36,6 +37,18 @@ class ControllerPost{
 
 	 		}
 	 	}
+ 	}
+
+ 	public static function editPost(){
+ 		$postManager = new \Modal\PostManager();
+ 		if(!empty($_GET['id'])){
+ 			if(is_int($_GET['id'])){
+ 				return ["content" => $postManager->view($_GET['id'])];
+ 			}
+ 		}
+ 		else{
+
+ 		}
  	}
 
 }
