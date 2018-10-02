@@ -5,6 +5,7 @@ $controller->addAction('viewAll',false);
 $controller->addAction('view',["id"]);
 $controller->addAction('addPost',false);
 $controller->addAction('edit',false);
+$controller->addAction('delete',false);
 
 class ControllerPost{
  	public static function viewAll(){
@@ -68,6 +69,14 @@ class ControllerPost{
  			else{
  				/* redirect */
  			}
+ 		}
+ 	}
+
+ 	public static function delete(){
+ 		if(array_key_exists('id', $_GET)){
+ 			$postManager = new \Modal\PostManager();
+ 			$postManager->delete($_GET['id']);
+ 			header('Location: /index.php?post&action=viewAll');
  		}
  	}
 

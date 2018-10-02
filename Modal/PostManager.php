@@ -60,4 +60,11 @@ class PostManager extends Manager{
 			$stmt->execute();
 		}
 	}
+
+	public function delete($id){
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("DELETE FROM `post` WHERE id = :id");
+		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
+		$stmt->execute();
+	}
 }
