@@ -25,9 +25,7 @@ class ControllerPost{
  	public static function addPost(){
  		if(array_key_exists('image', $_FILES)){
  			$image = new \Entity\File($_FILES['image']);
- 		
 
-	 		var_dump($image->checkValidExtension(array('jpg','jpeg','png')));
 	 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
 	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
 	 			$target = 'post/'.$name;
@@ -42,16 +40,19 @@ class ControllerPost{
  	public static function edit(){
  		$postManager = new \Modal\PostManager();
 
-
- 		if(!empty($_POST['title']) && !empty($_POST['content']) && array_key_exists('image', $_FILES)){
- 			var_dump("passe");
+ 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 4 && !empty($_GET['id'])){
+ 			$postManager->edit($_POST['title'],$_POST['content'],$_GET['id']);
  		}
- 		elseif(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0){
+ 		/*si post avec image*/
+ 		elseif(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && !empty($_GET['id'])){
  			$image = new \Entity\File($_FILES['image']);
  			if($image->checkValidExtension(array('jpg','jpeg','png'))){
- 				
- 			}
- 			
+	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
+	 			$target = 'post/'.$name;
+	 			$image->changeFolder($target);
+	 			$postManager->edit($_POST['title'],$_POST['content'],$_GET['id'],$target);
+	 			/*ajouter redirection*/
+	 		}
  		}
  		else{
  			if(!empty($_GET['id'])){
@@ -61,6 +62,7 @@ class ControllerPost{
  				}
  				else{
  					/* redirect post inconnu */
+
  				}
  			}
  			else{
