@@ -15,7 +15,7 @@
               <p class="post-meta">Poster par
                 <a href="#">{{article.getAuthor()}}</a>
                 le {{article.getCreatedAt()}}</p>
-                <a href="#"><button type="button" class="btn btn-primary">Modifier</button></a>
+                <a href="?post&action=edit&id={{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
                 <a href="#"><button type="button" class="btn btn-danger">Suprimer</button></a>
             </div>
             <hr>
