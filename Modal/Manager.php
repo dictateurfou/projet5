@@ -1,5 +1,5 @@
 <?php
-namespace Entity;
+namespace Modal;
 use PDO;
 abstract class Manager{
 

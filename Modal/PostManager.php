@@ -1,8 +1,6 @@
 <?php
 
 namespace Modal;
-
-use Entity\Manager;
 use PDO;
 
 class PostManager extends Manager{
