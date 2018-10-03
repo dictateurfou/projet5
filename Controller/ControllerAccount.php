@@ -49,16 +49,24 @@ class ControllerAccount{
 				if(count($error) == 0){
 					$userManager = new Modal\UserManager();
 					$pass = hash('sha256', $_POST['pass']);
-					$userManager->addUser($name,$mail,$pass);
+					return ["error" => [$userManager->addUser($name,$mail,$pass)]];
+				}
+				else{
+					return ["error" => $error];
 				}
 		}
-		return ["error" => $error];
+		
 	}
 
 	public static function connection(){
 		/*echo var_dump("connection");*/
+		if(!empty($_POST['pass']) && !empty($_POST['name'])){
+			$pass = hash('sha256', $_POST['pass']);
+			$name = $_POST['name'];
+			$userManager = new Modal\UserManager();
+			return ["connect" => [$userManager->addUser($name,$mail,$pass)]];
+		}
 	}
-
 }
 
 
