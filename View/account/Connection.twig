@@ -1,6 +1,55 @@
+<div id="connectAndRegister" class="text-center">
+	<button type="button" class="btn btn-dark col-md-5 active" id="connection-switch">Connection</button>
+	<button type="button" class="btn btn-dark col-md-5" id="register-switch">Inscription</button>
+	<form action="?account&action=connection" method="POST" name="addPost" id="connect-form">
+        <div class="control-group row justify-content-md-center" >
+          <div class="form-group floating-label-form-group controls">
+            <label>Pseudo</label>
+            <input name="title" type="text" class="form-control" placeholder="Pseudo" id="pseudo" required data-validation-required-message="Entrez votre pseudo">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group row justify-content-md-center">
+          <div class="form-group floating-label-form-group controls">
+            <label>Contenu</label>
+            <input name="pass" type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Entrez votre mot de passe">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group row justify-content-md-center">
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Connection</button>
+        </div>
+      </form>
 
-<form>
-	<input type="text" placeholder="pseudo" />
-	<input type="password" placeholder="pass" />
-	<input type="submit" />
-</form>
+      <form style="display:none" action="?post&action=addPost" method="POST" name="addPost" id="register-form">
+        <div class="control-group row justify-content-md-center">
+          <div class="form-group floating-label-form-group controls">
+            <label>Titre</label>
+            <input name="title" type="text" class="form-control" placeholder="Titre" id="title" required data-validation-required-message="Please enter your name.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group row justify-content-md-center">
+          <div class="form-group floating-label-form-group controls">
+            <label>Password</label>
+            <input name="pass" type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Entrez votre mot de passe">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+        <div class="control-group row justify-content-md-center">
+          <div class="form-group floating-label-form-group controls">
+            <label>Mail</label>
+            <input name="mail" type="mail" class="form-control" placeholder="Email" id="email" required data-validation-required-message="Entrez votre Email">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="send">Valider</button>
+        </div>
+      </form>
+</div>

@@ -43,6 +43,7 @@
 
 	    <!-- Custom styles for this template -->
 	    <link href="assets/css/clean-blog.min.css" rel="stylesheet">
+	    <link href="assets/css/style.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -147,5 +148,7 @@
 
 	    <!-- Custom scripts for this template -->
 	    <script src="assets/js/clean-blog.min.js"></script>
+	    <!-- My custom script -->
+	    <script src="assets/js/script.js" type="text/javascript"></script>
 	</body>
 </html>

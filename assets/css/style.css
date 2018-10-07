@@ -1,129 +1,24 @@
-/*for var_dump show correctly*/
 
-pre.xdebug-var-dump{
-	width:80%;
-	float:right;
-	right:1em;
+
+/*connection/register*/
+#connectAndRegister{
+	width:50%;
+	margin: 0 auto;
 }
 
-header{
-	width:85%;
-	position:absolute;
-	top:0em;
-	right:0em;
+#connection-switch{
+ margin-right:-3px;
 }
 
-nav#menu{
-	text-align:center;
-	font-size: 0;
+#connection-switch.active{
+	background-color:#fff;
+	color:#000;
+}
+#connection-switch:target{
+	border:none;
+	color:red;
 }
 
-nav#menu a{
-	padding: 0.5em;
-	background: red;
-	font-size:1rem;
-}
-
-
-#menu li{
-	display:inline-block;
-	margin:0em;
-	background-color:blue;
-	color:#fff;
-	font-size:1.5em;
-}
-
-/*left-bar*/
-
-#left-bar{
-	width:15%;
-	height:100%;
-	position:fixed;
-	top:0em;
-	background-color:red;
-	padding-top:1em;
-}
-
-#left-bar a{
-	display: block;
-}
-
-#circle-img{
-	padding: 1em;
-	width:8em;
-	height:8em;
-	margin:0 auto;
-	border:1px solid black;
-	border-radius:50%;
-}
-
-#left-bar #photo{
-	width:100%;
-}
-
-#name{
-	margin-top:1.5em;
-	text-align:center;
-	font-size:1.5em;
-}
-
-/*post-list*/
-
-#content{
-	width:85%;
-	float:right;
-	margin-top:2em;
-	right:0em;
-	color:#fff;
-}
-
-
-#post-list{
-	width:80%;
-	margin:0 auto;
-
-}
-
-#post-list h2{
-	font-size:4em;
-	text-align:center;
-}
-
-#post-list li{
-	overflow: hidden;
-	background-color:blue;
-}
-
-#post-list .img-post{
-	width:20%;
-	float:left;
-	left:0em;
-}
-
-#post-list .content-post{
-	width:70%;
-	float:left;
-	left:0em;
-}
-
-#post-list a{
-	color:#fff;
-}
-
-/**/
-
-
-#one-post{
-	width:80%;
-	margin:0 auto;
-	text-align:center;
-	background-color:green;
-}
-
-#one-post h2{
-	font-size:4em;
-}
-
-#one-post img{
-	width:25%;
+#register-switch{
+	margin-left:-3px;
 }
