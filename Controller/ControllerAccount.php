@@ -77,13 +77,13 @@ class ControllerAccount{
 	}
 
 	public static function validation(){
+		$userManager = new Modal\UserManager();
 		if(!empty($_GET['id']) && !empty($_GET['state'])){
 			$id = $_GET["id"];
 			$state = $_GET["state"];
-			$userManager = new Modal\UserManager();
-			return ["validation" => [$userManager->validate($state)]];
+			$userManager->validate($state,$id);
 		}
-		
+		return ["validation" => $userManager->accountInvalid()];
 	}
 }
 

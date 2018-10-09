@@ -55,7 +55,25 @@ class UserManager extends Manager{
 		}
 	}
 
-	public function validate($bool){
+	public function validate($bool,$id){
+		$request = "UPDATE users SET role = 0 WHERE id = :id";
+		if($bool){
+			$request = "UPDATE users SET role = 2 WHERE id = :id";
+		}
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare($request);
+		$stmt->bindParam(':id',$id);
+		$stmt->execute();
 
+	}
+
+	public function accountInvalid(){
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("SELECT * FROM users WHERE role = 1");
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->execute();
+		$users = $stmt->fetchAll();
+
+		return $users;
 	}
 }
