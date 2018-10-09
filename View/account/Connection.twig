@@ -1,11 +1,11 @@
 <div id="connectAndRegister" class="text-center">
 	<button type="button" class="btn btn-dark col-md-5 active" id="connection-switch">Connection</button>
 	<button type="button" class="btn btn-dark col-md-5" id="register-switch">Inscription</button>
-	<form action="?account&action=connection" method="POST" name="addPost" id="connect-form">
+	<form action="?account&action=connection" method="POST" name="connection" id="connect-form">
         <div class="control-group row justify-content-md-center" >
           <div class="form-group floating-label-form-group controls">
             <label>Pseudo</label>
-            <input name="title" type="text" class="form-control" placeholder="Pseudo" id="pseudo" required data-validation-required-message="Entrez votre pseudo">
+            <input name="name" type="text" class="form-control" placeholder="Pseudo" id="pseudo" required data-validation-required-message="Entrez votre pseudo">
             <p class="help-block text-danger"></p>
           </div>
         </div>
@@ -23,11 +23,13 @@
         </div>
       </form>
 
-      <form style="display:none" action="?post&action=addPost" method="POST" name="addPost" id="register-form">
+
+
+      <form style="display:none" action="?account&action=inscription" method="POST" name="register" id="register-form">
         <div class="control-group row justify-content-md-center">
           <div class="form-group floating-label-form-group controls">
             <label>Titre</label>
-            <input name="title" type="text" class="form-control" placeholder="Titre" id="title" required data-validation-required-message="Please enter your name.">
+            <input name="name" type="text" class="form-control" placeholder="Pseudo" id="pseudo" required data-validation-required-message="Please enter your name.">
             <p class="help-block text-danger"></p>
           </div>
         </div>
