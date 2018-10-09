@@ -28,35 +28,31 @@ class PostManager extends Manager{
 	public function addPost($title,$image,$content){
 		$cnx = $this->cnx();
 		$date = date('Y-m-d h:m:s');
-		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,'test',:date,:date)");
+		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,'test',NOW(),NOW())");
 
 		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
 		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
 		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
-		$stmt->bindParam(':date',$date);
+		/*$stmt->bindParam(':date',$date);*/
 		$stmt->execute();
 	}
 
 	public function edit($title,$content,$id,$image = null){
 		$cnx = $this->cnx();
-		$date = date('Y-m-d h:m:s');
+		
 		if($image !== null){
-			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content, `image` = :image,`editedAt` = :date WHERE `id` = :id");
-			$stmt->bindParam(':title',$title, PDO::PARAM_STR);
-			$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content, `image` = :image,`editedAt` = NOW() WHERE `id` = :id");
 			$stmt->bindParam(':image',$image, PDO::PARAM_STR);
-			$stmt->bindParam(':date',$date);
-			$stmt->bindParam(':id',$id);
-			$stmt->execute();
 		}
 		else{
-			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content,`editedAt` = :date WHERE `id` = :id");
-			$stmt->bindParam(':title',$title, PDO::PARAM_STR);
-			$stmt->bindParam(':content',$content, PDO::PARAM_STR);
-			$stmt->bindParam(':date',$date);
-			$stmt->bindParam(':id',$id);
-			$stmt->execute();
+			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content,`editedAt` = NOW() WHERE `id` = :id");
 		}
+
+		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
+		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+		$stmt->bindParam(':id',$id);
+		$stmt->execute();
+
 	}
 
 	public function delete($id){

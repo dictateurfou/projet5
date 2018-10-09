@@ -32,6 +32,7 @@ class ControllerPost{
 	 			$target = 'post/'.$name;
 	 			$image->changeFolder($target);
 	 			$postManager = new \Modal\PostManager();
+	 			/* mettre post en objet */
 	 			$postManager->addPost($_POST['title'],$target,$_POST['content']);
 
 	 		}
@@ -53,6 +54,7 @@ class ControllerPost{
 	 			$image->changeFolder($target);
 	 			$postManager->edit($_POST['title'],$_POST['content'],$_GET['id'],$target);
 	 			/*ajouter redirection*/
+	 			header('Location: /index.php?post&action=view&id='.$_GET['id']);
 	 		}
  		}
  		else{
