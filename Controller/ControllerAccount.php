@@ -4,6 +4,8 @@
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false);
 $controller->addAction('connection',false);
+$controller->addAction('validation', false);
+
 
 class ControllerAccount{
 
@@ -64,8 +66,24 @@ class ControllerAccount{
 			$pass = hash('sha256', $_POST['pass']);
 			$name = $_POST['name'];
 			$userManager = new Modal\UserManager();
-			return ["connect" => [$userManager->addUser($name,$mail,$pass)]];
+			$verif = $userManager->connect($name,$pass);
+			if($verif){
+				header('Location: /index.php');
+			}
+			else{
+				return ["connect" => "l'identifiant ou le mot de passe n'est pas correct"];
+			}
 		}
+	}
+
+	public static function validation(){
+		if(!empty($_GET['id']) && !empty($_GET['state'])){
+			$id = $_GET["id"];
+			$state = $_GET["state"];
+			$userManager = new Modal\UserManager();
+			return ["validation" => [$userManager->validate($state)]];
+		}
+		
 	}
 }
 

@@ -16,7 +16,7 @@ class UserManager extends Manager{
 		
 
 		if($test == false){
-			$stmt = $cnx->prepare("INSERT INTO users (name, pass, mail,avatar,role) VALUES (:name, :pass, :mail,'avatar/default.png',0)");
+			$stmt = $cnx->prepare("INSERT INTO users (name, pass, mail,avatar,role) VALUES (:name, :pass, :mail,'avatar/default.png',1)");
 			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':mail', $mail);
 			$stmt->bindParam(':pass', $pass);
@@ -37,7 +37,25 @@ class UserManager extends Manager{
 		return $message;
 	}
 
-	public function connect(){
+	public function connect($name,$pass){
+		$cnx = $this->cnx();
+
+		$stmt = $cnx->prepare("SELECT * FROM users WHERE name = :name AND pass = :pass");
+		$stmt->bindParam(':name', $name);
+		$stmt->bindParam(':pass',$pass);
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->execute();
+		$user = $stmt->fetch();
+		if($user !== false){
+			$_SESSION['id'] = $user->getId();
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public function validate($bool){
 
 	}
 }
