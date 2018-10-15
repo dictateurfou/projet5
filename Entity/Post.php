@@ -40,4 +40,32 @@ class Post
 		return $this->editedAt;
 	}
 
+	public function setId($id){
+		$this->id = $id;
+	}
+
+	public function setTitle($title){
+		$this->title = $title;
+	}
+
+	public function setImage($arg){
+		$this->image = $arg;
+	}
+
+	public function setContent($arg){
+		$this->content = $arg;
+	}
+
+	public function setAuthor($arg){
+		$this->author = $arg;
+	}
+
+	public function getCreatedAt($arg){
+		$this->createdAt = $arg;
+	}
+
+	public function getEditedAt($arg){
+		$this->editedAt = $arg;
+	}
+
 }

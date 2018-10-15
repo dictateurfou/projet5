@@ -35,4 +35,29 @@ class User
 		return $this->role;
 	}
 
+
+	public function setId($arg){
+		$this->id = $arg;
+	}
+
+	public function setName($arg){
+		$this->name = $arg;
+	}
+
+	public function Pass($arg){
+		$this->pass = $arg;
+	}
+
+	public function getMail($arg){
+		$this->mail = $arg;
+	}
+
+	public function getAvatar($arg){
+		$this->image = $arg;
+	}
+
+	public function getRole($arg){
+		$this->role = $arg;
+	}
+
 }

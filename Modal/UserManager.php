@@ -4,6 +4,8 @@ use PDO;
 
 class UserManager extends Manager{
 
+
+//ajouter edit
 	public function addUser($name,$mail,$pass){
 		$cnx = $this->cnx();
 
@@ -46,8 +48,8 @@ class UserManager extends Manager{
 		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$user = $stmt->fetch();
-		if($user !== false){
-			$_SESSION['id'] = $user->getId();
+		if($user !== false && $user.getRole() !== 0){
+			/*$_SESSION['id'] = $user->getId();*/
 			return true;
 		}
 		else{
