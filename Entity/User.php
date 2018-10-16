@@ -10,6 +10,7 @@ class User
 	private $mail;
 	private $avatar;
 	private $role;
+	private $validate;
 
 	public function getId(){
 		return $this->id;
@@ -35,6 +36,9 @@ class User
 		return $this->role;
 	}
 
+	public function getValidate(){
+		return $this->validate;
+	}
 
 	public function setId($arg){
 		$this->id = $arg;
@@ -44,20 +48,24 @@ class User
 		$this->name = $arg;
 	}
 
-	public function Pass($arg){
+	public function setPass($arg){
 		$this->pass = $arg;
 	}
 
-	public function getMail($arg){
+	public function setMail($arg){
 		$this->mail = $arg;
 	}
 
-	public function getAvatar($arg){
+	public function setAvatar($arg){
 		$this->image = $arg;
 	}
 
-	public function getRole($arg){
+	public function setRole($arg){
 		$this->role = $arg;
+	}
+
+	public function setValidate($arg){
+		$this->validate = $arg;
 	}
 
 }

@@ -2,9 +2,9 @@
 
 
 /*LOAD ROUTE ACTION*/
-$controller->addAction('inscription',false);
-$controller->addAction('connection',false);
-$controller->addAction('validation', false);
+$controller->addAction('inscription',false,false);
+$controller->addAction('connection',false,false);
+$controller->addAction('validation', true,true);
 
 
 class ControllerAccount{

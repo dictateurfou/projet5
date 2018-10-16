@@ -18,7 +18,7 @@ class UserManager extends Manager{
 		
 
 		if($test == false){
-			$stmt = $cnx->prepare("INSERT INTO users (name, pass, mail,avatar,role) VALUES (:name, :pass, :mail,'avatar/default.png',1)");
+			$stmt = $cnx->prepare("INSERT INTO users (name, pass, mail,avatar,role,validate) VALUES (:name, :pass, :mail,'avatar/default.png',1,'no')");
 			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':mail', $mail);
 			$stmt->bindParam(':pass', $pass);
@@ -39,6 +39,17 @@ class UserManager extends Manager{
 		return $message;
 	}
 
+	public function getUserById($id){
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("SELECT * FROM users WHERE id = :id");
+		$stmt->bindParam(':id', $id);
+		$stmt->execute();
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$user = $stmt->fetch();
+
+		return $user;
+	}
+
 	public function connect($name,$pass){
 		$cnx = $this->cnx();
 
@@ -48,8 +59,9 @@ class UserManager extends Manager{
 		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$user = $stmt->fetch();
-		if($user !== false && $user.getRole() !== 0){
-			/*$_SESSION['id'] = $user->getId();*/
+		if($user !== false and $user->getValidate() == 'yes'){
+			$_SESSION['id'] = $user->getId();
+			$_SESSION['user'] = $user;
 			return true;
 		}
 		else{
@@ -58,9 +70,9 @@ class UserManager extends Manager{
 	}
 
 	public function validate($bool,$id){
-		$request = "UPDATE users SET role = 0 WHERE id = :id";
-		if($bool){
-			$request = "UPDATE users SET role = 2 WHERE id = :id";
+		$request = "UPDATE users SET validate = 'refused' WHERE id = :id";
+		if($bool !== 'false'){
+			$request = "UPDATE users SET validate = 'yes' WHERE id = :id";
 		}
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare($request);
@@ -71,11 +83,28 @@ class UserManager extends Manager{
 
 	public function accountInvalid(){
 		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("SELECT * FROM users WHERE role = 1");
+		$stmt = $cnx->prepare("SELECT * FROM users WHERE validate = 'no'");
 		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$users = $stmt->fetchAll();
 
 		return $users;
+	}
+
+	public function userHaveRight($route,$action){
+		$passed = false;
+		$user = $_SESSION['user'];
+		$role = $user->getRole();
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("SELECT * FROM user_right WHERE action = :action AND route = :route AND role = :role");
+		$stmt->bindParam(':action',$action);
+		$stmt->bindParam(':route',$route);
+		$stmt->bindParam(':role',$role);
+		$stmt->execute();
+		$right = $stmt->fetch();
+		if($right !== false){
+			$passed = true;
+		}
+		return $passed;
 	}
 }

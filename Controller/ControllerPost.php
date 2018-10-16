@@ -1,11 +1,11 @@
 <?php
 
 /*LOAD ROUTE ACTION*/
-$controller->addAction('viewAll',false);
-$controller->addAction('view',["id"]);
-$controller->addAction('addPost',false);
-$controller->addAction('edit',false);
-$controller->addAction('delete',false);
+$controller->addAction('viewAll',false,false);
+$controller->addAction('view',false,false);
+$controller->addAction('addPost',true,true);
+$controller->addAction('edit',true,true);
+$controller->addAction('delete',true,true);
 
 class ControllerPost{
  	public static function viewAll(){

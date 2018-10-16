@@ -40,12 +40,12 @@ class Post
 		return $this->editedAt;
 	}
 
-	public function setId($id){
-		$this->id = $id;
+	public function setId($arg){
+		$this->id = $arg;
 	}
 
-	public function setTitle($title){
-		$this->title = $title;
+	public function setTitle($arg){
+		$this->title = $arg;
 	}
 
 	public function setImage($arg){
@@ -60,11 +60,11 @@ class Post
 		$this->author = $arg;
 	}
 
-	public function getCreatedAt($arg){
+	public function setCreatedAt($arg){
 		$this->createdAt = $arg;
 	}
 
-	public function getEditedAt($arg){
+	public function setEditedAt($arg){
 		$this->editedAt = $arg;
 	}
 
