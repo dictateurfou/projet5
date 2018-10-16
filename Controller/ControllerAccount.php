@@ -5,6 +5,11 @@
 $controller->addAction('inscription',false,false);
 $controller->addAction('connection',false,false);
 $controller->addAction('validation', true,true);
+$controller->addAction('edit',false,false);
+$controller->addAction('changePassword',true,false);
+$controller->addAction('deleteMyAccount',true,false);
+$controller->addAction('editProfile',true,false);
+
 
 
 class ControllerAccount{
@@ -85,6 +90,32 @@ class ControllerAccount{
 		}
 		return ["validation" => $userManager->accountInvalid()];
 	}
+
+	public static function PasswordMissing($mail){
+
+	}
+
+	public static function editProfile(){
+		$userManager = new Modal\UserManager();
+		if(!empty($_GET['subAction'])){
+			$action = $_GET['subAction'];
+			if($action == "delete"){
+				$userManager->delete($_SESSION['id']);
+				session_destroy();
+				header('Location: /index.php');
+			}
+			elseif($action == "changePassword"){
+				if(!empty($_POST['password'])){
+					$pass = hash('sha256', $_POST['password']);
+					$userManager->changePassword($pass);
+					session_destroy();
+					header('Location: /index.php');
+				}
+			}
+		}
+	}
+
+
 }
 
 

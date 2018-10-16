@@ -107,4 +107,20 @@ class UserManager extends Manager{
 		}
 		return $passed;
 	}
+
+	public function changePassword($pass){
+		$id = $_SESSION['id'];
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("UPDATE users SET `pass` = :pass WHERE `id` = :id");
+		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
+		$stmt->bindParam(':pass',$pass);
+		$stmt->execute();
+	}
+
+	public function delete($id){
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("DELETE FROM users WHERE `id` = :id");
+		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
+		$stmt->execute();
+	}
 }
