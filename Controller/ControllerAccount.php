@@ -4,11 +4,8 @@
 /*LOAD ROUTE ACTION*/
 $controller->addAction('inscription',false,false);
 $controller->addAction('connection',false,false);
-$controller->addAction('validation', true,true);
-$controller->addAction('edit',false,false);
-$controller->addAction('changePassword',true,false);
-$controller->addAction('deleteMyAccount',true,false);
-$controller->addAction('editProfile',true,false);
+$controller->addAction('validation/state/id', true,true);
+$controller->addAction('editProfile/subAction',true,false);
 
 
 
@@ -73,7 +70,7 @@ class ControllerAccount{
 			$userManager = new Modal\UserManager();
 			$verif = $userManager->connect($name,$pass);
 			if($verif){
-				header('Location: /index.php');
+				header('Location: /');
 			}
 			else{
 				return ["connect" => "l'identifiant ou le mot de passe n'est pas correct"];

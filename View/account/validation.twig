@@ -2,8 +2,8 @@
 	{% if validation != false %}
 	    {% for user in validation %}
 	    	<li>{{user.getName()}}
-	    		<a href="?account&action=validation&state=true&id={{user.getId()}}" class="btn btn-success btn-valid" role="button">Valider</a>
-	    		<a href="?account&action=validation&state=false&id={{user.getId()}}" class="btn btn-danger btn-valid" role="button" >Refuser</a>
+	    		<a href="/account/validation/true/{{user.getId()}}" class="btn btn-success btn-valid" role="button">Valider</a>
+	    		<a href="/account/validation/false/{{user.getId()}}" class="btn btn-danger btn-valid" role="button" >Refuser</a>
 	    	</li>
 		{% endfor %}
 	{% endif %}

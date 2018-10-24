@@ -4,7 +4,7 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       {% for article in articles %}
             <div class="post-preview">
-              <a href="?post&action=view&id={{article.getId()}}">
+              <a href="/post/view/{{article.getId()}}">
                 <h2 class="post-title">
                   {{article.getTitle()}}
                 </h2>
@@ -15,8 +15,8 @@
               <p class="post-meta">Poster par
                 <a href="#">{{article.getAuthor()}}</a>
                 le {{article.getCreatedAt()}}</p>
-                <a href="?post&action=edit&id={{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
-                <a href="?post&action=delete&id={{article.getId()}}"><button type="button" class="btn btn-danger">Suprimer</button></a>
+                <a href="/post/edit/{{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
+                <a href="/post/delete/{{article.getId()}}"><button type="button" class="btn btn-danger">Suprimer</button></a>
             </div>
             <hr>
       {% endfor %}

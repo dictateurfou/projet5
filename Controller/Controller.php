@@ -11,18 +11,25 @@ class Controller{
 	private $route;
 	private $routeList = [];
 	private $action = false;
-	
+	private $url;
+
+
 	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.twig';
 	const DEFAULTPAGE = 'post';
 	const DEFAULTACTION = 'viewAll';
 
+	public function __construct(){
+		$this->url = ltrim($_SERVER['REQUEST_URI'],'/');
+	}
+
 	public function control(){
 		$find = false;
 		$i = 0;
+		$namespace = explode('/', $this->url)[0];
 		while(count($this->routeList) > $i){
 			/*cherche si ?routeList es spécifier en rapport avec les routeLists principals*/
-			if(array_key_exists($this->routeList[$i]['name'],$_GET)){
+			if($this->routeList[$i]['name'] == $namespace){
 				$this->route = $this->routeList[$i]['name'];
 				$this->vue = $this->routeList[$i]['name']."/";
 				$this->controller = "Controller".ucfirst($this->routeList[$i]['name']);
@@ -33,7 +40,7 @@ class Controller{
 
 		/*si aucune route trouver on redirige vers la route par defaut */
 		if($find == false){
-			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
+			header('Location: /'.self::DEFAULTPAGE.'/'.self::DEFAULTACTION);
 		}
 
 		/*$this->checkAction();*/
@@ -54,15 +61,36 @@ class Controller{
 		$className = "\Controller\\".$this->controller;
 		$methodName = "defaut";
 		$userManager = new \Modal\UserManager();
+		$urlExplode = explode('/', $this->url);
+		$actionOffset = 1;
+		
 
 		/*si connecter on met le résultat de l'user en session pour un usage global*/
 		if(array_key_exists('id',$_SESSION)){
 			$_SESSION['user'] = $userManager->getUserById($_SESSION['id']);
 		}
-		/*var_dump($this->action);*/
-		if(array_key_exists('action',$_GET)){
+
+		if(array_key_exists($actionOffset,$urlExplode)){
 			while($i < count($this->action)){
-				if($_GET["action"] == $this->action[$i]["name"]){
+				$actionExplode = explode('/', $this->action[$i]["name"]);
+			
+				/*si l'action contient des paramètre on lui attribut au tableau get et sont défini dans l'url actuelle*/
+				if(isset($urlExplode[2]) && strpos($this->action[$i]["name"], "/") !== false){
+					$this->action[$i]["name"] = $actionExplode[0];
+					$e = 1;
+					while($e < count($actionExplode)){
+						$_GET[$actionExplode[$e]] = $urlExplode[$e+1];
+						$e++;
+					}
+
+				}
+				/*sinon si l'argument n'est pas défini dans l'url et que la route correspond (pour les url avec paramètre optionel) */
+				else if(!isset($urlExplode[2]) && strpos($this->action[$i]["name"], "/") !== false){
+					$this->action[$i]["name"] = $actionExplode[0];
+				}
+
+				/* ici on check si l'action correspond a l'url */
+				if($urlExplode[$actionOffset] == $this->action[$i]["name"]){
 					$className = $this->controller;
 					$methodName = $this->action[$i]["name"];
 					$this->vue = $this->vue.$this->action[$i]["name"];
@@ -70,9 +98,10 @@ class Controller{
 					//required connect
 					if($this->action[$i]["connected"] == true){
 						if(!array_key_exists('id',$_SESSION)){
+
 							$find = false;
 						}
-						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$this->action[$i]["name"]) == false){
+						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$actionExplode[0]) == false){
 							$find = false;
 						}
 
@@ -82,10 +111,10 @@ class Controller{
 			}
 		}
 
-		/*si trouver on redirige*/
+		/*si page n'existe pas on redirige*/
 		if($find == false){
-			/*si aucune action ne correspond a la routeList on redirige vers la routeList par défaut */
-			header('Location: /index.php?'.self::DEFAULTPAGE.'&action='.self::DEFAULTACTION);
+			/*si aucune action ne correspond a la routeList on redirige vers la route par défaut */
+			header('Location: /'.self::DEFAULTPAGE.'/'.self::DEFAULTACTION);
 		}
 		/*sinon (condition obliger sinon éxecute quand même l'action avant redirection)*/
 		else{

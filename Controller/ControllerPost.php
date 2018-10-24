@@ -1,11 +1,13 @@
 <?php
 
 /*LOAD ROUTE ACTION*/
+
+/*<route url="/news-(.+)-([0-9]+)\.html" module="News" action="show" vars="slug,id" />*/
 $controller->addAction('viewAll',false,false);
-$controller->addAction('view',false,false);
+$controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
-$controller->addAction('edit',true,true);
-$controller->addAction('delete',true,true);
+$controller->addAction('edit/id',true,true);
+$controller->addAction('delete/id',true,true);
 
 class ControllerPost{
  	public static function viewAll(){
