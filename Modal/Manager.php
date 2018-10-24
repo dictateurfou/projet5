@@ -7,9 +7,6 @@ abstract class Manager{
 	const USER = 'root';
 	const PASS = '';
 
-
-
-
 	protected function cnx(){
 		try {
 		    $dbh = new PDO(self::DSN, self::USER, self::PASS);
