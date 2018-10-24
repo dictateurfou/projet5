@@ -15,7 +15,7 @@
 	$router = new \Route\Router;
 	$controller = new \Route\Controller;
 	$controller->control();
-	var_dump($router->getHTTPRequest()->requestURI());
+	
 
 	$router->addApp("Blog","Blog/FrontEnd");
 	$router->addApp("Blog/Admin","Blog/Administration");
