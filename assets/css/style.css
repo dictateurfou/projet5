@@ -1,3 +1,4 @@
+
 /*for var_dump show correctly*/
 
 pre.xdebug-var-dump{
@@ -13,36 +14,27 @@ header{
 	right:0em;
 }
 
-nav#menu{
-	text-align:center;
-	font-size: 0;
-}
-
 nav#menu a{
 	padding: 0.5em;
 	background: red;
 	font-size:1rem;
+
+/*connection/register*/
+#connectAndRegister{
+	width:50%;
+	margin: 0 auto;
+
 }
 
-
-#menu li{
-	display:inline-block;
-	margin:0em;
-	background-color:blue;
-	color:#fff;
-	font-size:1.5em;
+#connection-switch{
+ margin-right:-3px;
 }
 
-/*left-bar*/
-
-#left-bar{
-	width:15%;
-	height:100%;
-	position:fixed;
-	top:0em;
-	background-color:red;
-	padding-top:1em;
+#connection-switch.active{
+	background-color:#fff;
+	color:#000;
 }
+
 
 #left-bar a{
 	display: block;
@@ -68,3 +60,13 @@ nav#menu a{
 }
 
 /**/
+
+#connection-switch:target{
+	border:none;
+	color:red;
+}
+
+#register-switch{
+	margin-left:-3px;
+}
+
