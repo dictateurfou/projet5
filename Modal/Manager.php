@@ -3,9 +3,9 @@ namespace Modal;
 use PDO;
 abstract class Manager{
 
-	const DSN = 'mysql:dbname=surviveigh44;host=surviveigh44.mysql.db';
-	const USER = 'surviveigh44';
-	const PASS = 'Geneston44';
+	const DSN = 'mysql:dbname=projet5;host=localhost';
+	const USER = 'root';
+	const PASS = '';
 
 	protected function cnx(){
 		try {
