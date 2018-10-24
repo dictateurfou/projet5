@@ -1,9 +1,29 @@
 
+/*for var_dump show correctly*/
+
+pre.xdebug-var-dump{
+	width:80%;
+	position:absolute;
+	right:1em;
+}
+
+header{
+	width:85%;
+	position:absolute;
+	top:0em;
+	right:0em;
+}
+
+nav#menu a{
+	padding: 0.5em;
+	background: red;
+	font-size:1rem;
 
 /*connection/register*/
 #connectAndRegister{
 	width:50%;
 	margin: 0 auto;
+
 }
 
 #connection-switch{
@@ -14,6 +34,33 @@
 	background-color:#fff;
 	color:#000;
 }
+
+
+#left-bar a{
+	display: block;
+}
+
+#circle-img{
+	padding: 1em;
+	width:8em;
+	height:8em;
+	margin:0 auto;
+	border:1px solid black;
+	border-radius:50%;
+}
+
+#left-bar #photo{
+	width:100%;
+}
+
+#name{
+	margin-top:1.5em;
+	text-align:center;
+	font-size:1.5em;
+}
+
+/**/
+
 #connection-switch:target{
 	border:none;
 	color:red;
@@ -22,3 +69,4 @@
 #register-switch{
 	margin-left:-3px;
 }
+
