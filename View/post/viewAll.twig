@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      {% for article in articles %}
+            <div class="post-preview">
+              <a href="/post/view/{{article.getId()}}">
+                <h2 class="post-title">
+                  {{article.getTitle()}}
+                </h2>
+                <p class="post-subtitle">
+                  {{article.getContent()|slice(1, 200)}} ...
+                </p>
+              </a>
+              <p class="post-meta">Poster par
+                <a href="#">{{article.getAuthor()}}</a>
+                le {{article.getCreatedAt()}}</p>
+                <a href="/post/edit/{{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
+                <a href="/post/delete/{{article.getId()}}"><button type="button" class="btn btn-danger">Suprimer</button></a>
+            </div>
+            <hr>
+      {% endfor %}
+            <!-- Pager -->
+            <div class="clearfix">
+              <a class="btn btn-primary float-right" href="#">Ancien Posts &rarr;</a>
+            </div>
+          </div>
+  </div>
+</div>
+

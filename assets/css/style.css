@@ -1,0 +1,24 @@
+
+
+/*connection/register*/
+#connectAndRegister{
+	width:50%;
+	margin: 0 auto;
+}
+
+#connection-switch{
+ margin-right:-3px;
+}
+
+#connection-switch.active{
+	background-color:#fff;
+	color:#000;
+}
+#connection-switch:target{
+	border:none;
+	color:red;
+}
+
+#register-switch{
+	margin-left:-3px;
+}
