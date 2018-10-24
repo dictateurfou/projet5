@@ -1,5 +1,6 @@
 <?php
 
+
 	/* autoloader */
 	/*const DEFAULT_APP = 'Blog';*/
 
@@ -19,6 +20,7 @@
 	$router->addApp("Blog","Blog/FrontEnd");
 	$router->addApp("Blog/Admin","Blog/Administration");
 	$router->checkApp();
+
 
 	session_start();
 	if(array_key_exists('id', $_SESSION)){
@@ -49,17 +51,21 @@
 	$render = $twig->render($controller->getvue(), $result);*/
 
 
+
+
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 
+
 		<meta charset="utf-8">
 		<title>acceuil</title>
 		<link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
 
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,9 +86,12 @@
 	    <link href="/assets/css/clean-blog.min.css" rel="stylesheet">
 	    <link href="/assets/css/style.css" rel="stylesheet">
 
+
+
 	</head>
 
 	<body>
+
 
 
 		<header>
@@ -114,6 +123,27 @@
 	              <a class="nav-link" href="post.html">Connection</a>
 	            </li>
 
+
+		<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+	      <div class="container">
+	        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+	        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	          Menu
+	          <i class="fas fa-bars"></i>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarResponsive">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <a class="nav-link" href="index.html">Acceuil</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="?post&action=viewAll">Blog</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="post.html">Connection</a>
+	            </li>
+
+
 	          </ul>
 	        </div>
 	      </div>
@@ -135,6 +165,8 @@
 
 		<section id="left-bar" style="display:none">
 
+
+
 			<div id="circle-img">
 				<img id="photo" src="/assets/img/photo.png"/>
 			</div>
@@ -149,7 +181,9 @@
 		<section id="content">
 
 
+
 		</section>
+
 
 			<?php
 

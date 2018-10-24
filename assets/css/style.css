@@ -1,4 +1,5 @@
 
+
 /*for var_dump show correctly*/
 
 pre.xdebug-var-dump{
@@ -19,15 +20,20 @@ nav#menu a{
 	background: red;
 	font-size:1rem;
 
+
+
+
 /*connection/register*/
 #connectAndRegister{
 	width:50%;
 	margin: 0 auto;
 
+
 }
 
 #connection-switch{
  margin-right:-3px;
+
 }
 
 #connection-switch.active{
@@ -38,20 +44,23 @@ nav#menu a{
 
 #left-bar a{
 	display: block;
+
 }
 
-#circle-img{
-	padding: 1em;
-	width:8em;
-	height:8em;
-	margin:0 auto;
-	border:1px solid black;
-	border-radius:50%;
+#connection-switch.active{
+	background-color:#fff;
+	color:#000;
+
+}
+#connection-switch:target{
+	border:none;
+	color:red;
 }
 
-#left-bar #photo{
-	width:100%;
+#register-switch{
+	margin-left:-3px;
 }
+
 
 #name{
 	margin-top:1.5em;
@@ -69,4 +78,5 @@ nav#menu a{
 #register-switch{
 	margin-left:-3px;
 }
+
 

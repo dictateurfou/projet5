@@ -4,7 +4,10 @@ RewriteEngine On
 # Alors on ne réécrit pas l'URL.
 RewriteCond %{REQUEST_FILENAME} !-f
 
+
 RewriteRule ^(.*)$ index.php?app=Blog/FrontEnd [QSA,L]
-=======
+
+RewriteRule ^(.*)$ index.php [QSA,L]
+
 RewriteRule ^(.*)$ index.php [QSA,L]
 
