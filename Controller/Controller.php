@@ -2,27 +2,20 @@
 namespace Controller;
 /*for twig component*/
 require_once("vendor/autoload.php");
-
-
 class Controller{
-
 	private $vue;
 	private $controller;
 	private $route;
 	private $routeList = [];
 	private $action = false;
 	private $url;
-
-
 	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.twig';
 	const DEFAULTPAGE = 'post';
 	const DEFAULTACTION = 'viewAll';
-
 	public function __construct(){
 		$this->url = ltrim($_SERVER['REQUEST_URI'],'/');
 	}
-
 	public function control(){
 		$find = false;
 		$i = 0;
@@ -37,24 +30,18 @@ class Controller{
 			}
 			$i++;
 		}
-
 		/*si aucune route trouver on redirige vers la route par defaut */
 		if($find == false){
 			header('Location: /'.self::DEFAULTPAGE.'/'.self::DEFAULTACTION);
 		}
-
 		/*$this->checkAction();*/
 	}
-
 	public function getvue(){
 		return $this->vue.self::EXTENSIONVIEW;
 	}
-
 	public function getController(){
 		return $this->controller.self::EXTENSIONCLASSE;
 	}
-
-
 	public function render(){
 		$find = false;
 		$i = 0;
@@ -64,12 +51,10 @@ class Controller{
 		$urlExplode = explode('/', $this->url);
 		$actionOffset = 1;
 		
-
 		/*si connecter on met le résultat de l'user en session pour un usage global*/
 		if(array_key_exists('id',$_SESSION)){
 			$_SESSION['user'] = $userManager->getUserById($_SESSION['id']);
 		}
-
 		if(array_key_exists($actionOffset,$urlExplode)){
 			while($i < count($this->action)){
 				$actionExplode = explode('/', $this->action[$i]["name"]);
@@ -82,13 +67,11 @@ class Controller{
 						$_GET[$actionExplode[$e]] = $urlExplode[$e+1];
 						$e++;
 					}
-
 				}
 				/*sinon si l'argument n'est pas défini dans l'url et que la route correspond (pour les url avec paramètre optionel) */
 				else if(!isset($urlExplode[2]) && strpos($this->action[$i]["name"], "/") !== false){
 					$this->action[$i]["name"] = $actionExplode[0];
 				}
-
 				/* ici on check si l'action correspond a l'url */
 				if($urlExplode[$actionOffset] == $this->action[$i]["name"]){
 					$className = $this->controller;
@@ -98,19 +81,16 @@ class Controller{
 					//required connect
 					if($this->action[$i]["connected"] == true){
 						if(!array_key_exists('id',$_SESSION)){
-
 							$find = false;
 						}
 						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$actionExplode[0]) == false){
 							$find = false;
 						}
-
 					}
 				}
 				$i++;
 			}
 		}
-
 		/*si page n'existe pas on redirige*/
 		if($find == false){
 			/*si aucune action ne correspond a la routeList on redirige vers la route par défaut */
@@ -130,11 +110,9 @@ class Controller{
 		}
 		
 	}
-
 	public function addRoute($name){
 			array_push($this->routeList,["name" => $name]);
 	}
-
 	public function addAction($name,$connected,$restricted){
 		if($this->action == false){
 			$this->action = [];
@@ -145,6 +123,3 @@ class Controller{
 		}
 	}
 }
-
-
-

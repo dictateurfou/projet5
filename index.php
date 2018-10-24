@@ -1,27 +1,4 @@
 <?php
-
-
-	/* autoloader */
-	/*const DEFAULT_APP = 'Blog';*/
-
-	require('src/Autoloader/Psr4AutoloaderClass.php');
-	$loader = new \Autoloader\Psr4AutoloaderClass;
-  	$loader->register();
-
-	/*$loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');*/
-	$loader->addNamespace('Route', 'src/Route/');
-
-	/*new \Blog\Administration\Test;*/
-	$router = new \Route\Router;
-	$controller = new \Route\Controller;
-	$controller->control();
-	
-
-	$router->addApp("Blog","Blog/FrontEnd");
-	$router->addApp("Blog/Admin","Blog/Administration");
-	$router->checkApp();
-
-
 	session_start();
 	if(array_key_exists('id', $_SESSION)){
 		var_dump("connected");
@@ -50,23 +27,11 @@
 
 	$render = $twig->render($controller->getvue(), $result);*/
 
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-
-
-		<meta charset="utf-8">
-		<title>acceuil</title>
-		<link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-
-
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -85,25 +50,10 @@
 	    <!-- Custom styles for this template -->
 	    <link href="/assets/css/clean-blog.min.css" rel="stylesheet">
 	    <link href="/assets/css/style.css" rel="stylesheet">
-
-
-
 	</head>
 
 	<body>
 
-
-
-		<header>
-			<nav id="menu">
-				<a href="#">Acceuil</a>
-				<a href="#">Blog</a>
-				<a href="#">Connexion</a>
-			</nav>
-		</header>
-
-		<section id="left-bar">
-
 		<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 	      <div class="container">
 	        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
@@ -122,27 +72,6 @@
 	            <li class="nav-item">
 	              <a class="nav-link" href="post.html">Connection</a>
 	            </li>
-
-
-		<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-	      <div class="container">
-	        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-	        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	          Menu
-	          <i class="fas fa-bars"></i>
-	        </button>
-	        <div class="collapse navbar-collapse" id="navbarResponsive">
-	          <ul class="navbar-nav ml-auto">
-	            <li class="nav-item">
-	              <a class="nav-link" href="index.html">Acceuil</a>
-	            </li>
-	            <li class="nav-item">
-	              <a class="nav-link" href="?post&action=viewAll">Blog</a>
-	            </li>
-	            <li class="nav-item">
-	              <a class="nav-link" href="post.html">Connection</a>
-	            </li>
-
 
 	          </ul>
 	        </div>
@@ -164,9 +93,6 @@
 	    </header>
 
 		<section id="left-bar" style="display:none">
-
-
-
 			<div id="circle-img">
 				<img id="photo" src="/assets/img/photo.png"/>
 			</div>
@@ -179,11 +105,6 @@
 		</section>
 
 		<section id="content">
-
-
-
-		</section>
-
 
 			<?php
 
@@ -235,6 +156,5 @@
 	    <script src="/assets/js/clean-blog.min.js"></script>
 	    <!-- My custom script -->
 	    <script src="/assets/js/script.js" type="text/javascript"></script>
-
 	</body>
 </html>
