@@ -6,8 +6,8 @@
 $controller->addAction('viewAll',false,false);
 $controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
-$controller->addAction('edit/id',true,true);
-$controller->addAction('delete/id',true,true);
+$controller->addAction('edit',true,true);
+$controller->addAction('delete',true,true);
 
 class ControllerPost{
  	public static function viewAll(){

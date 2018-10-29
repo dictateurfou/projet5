@@ -1,56 +1,18 @@
 
 
-/*for var_dump show correctly*/
-
-pre.xdebug-var-dump{
-	width:80%;
-	position:absolute;
-	right:1em;
-}
-
-header{
-	width:85%;
-	position:absolute;
-	top:0em;
-	right:0em;
-}
-
-nav#menu a{
-	padding: 0.5em;
-	background: red;
-	font-size:1rem;
-
-
-
-
 /*connection/register*/
 #connectAndRegister{
 	width:50%;
 	margin: 0 auto;
-
-
 }
 
 #connection-switch{
  margin-right:-3px;
-
 }
 
 #connection-switch.active{
 	background-color:#fff;
 	color:#000;
-}
-
-
-#left-bar a{
-	display: block;
-
-}
-
-#connection-switch.active{
-	background-color:#fff;
-	color:#000;
-
 }
 #connection-switch:target{
 	border:none;
@@ -60,23 +22,3 @@ nav#menu a{
 #register-switch{
 	margin-left:-3px;
 }
-
-
-#name{
-	margin-top:1.5em;
-	text-align:center;
-	font-size:1.5em;
-}
-
-/**/
-
-#connection-switch:target{
-	border:none;
-	color:red;
-}
-
-#register-switch{
-	margin-left:-3px;
-}
-
-
