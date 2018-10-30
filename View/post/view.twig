@@ -24,3 +24,30 @@
         </div>
       </div>
 </article>
+
+<div class="container">
+<ul class="row">
+  <li class="col-lg-8 col-md-10 mx-auto"><p class="comment">voici mon commentaire</p><div class="info-comment"><p><a href="#">author</a></p> <p class="comment-date">20-10-2018 20h16</p></div></li>
+</ul>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <form action="/post/addComment/{{article.getId()}}" method="POST" name="addComment" id="contactForm">
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Contenu</label>
+            <textarea name="content" rows="5" class="form-control" placeholder="Contenu" id="content" required data-validation-required-message="Please enter a message."></textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

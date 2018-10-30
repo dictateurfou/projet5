@@ -2,10 +2,11 @@
 
 /*LOAD ROUTE ACTION*/
 
-/*<route url="/news-(.+)-([0-9]+)\.html" module="News" action="show" vars="slug,id" />*/
+
 $controller->addAction('viewAll',false,false);
 $controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
+$controller->addAction('addComment/post',true,false);
 $controller->addAction('edit/id',true,true);
 $controller->addAction('delete/id',true,true);
 
@@ -18,7 +19,8 @@ class ControllerPost{
  	public static function view(){
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
- 			return ["article" => $postManager->view($_GET['id'])];
+ 			$commentManager = new \Modal\CommentManager();
+ 			return ["article" => $postManager->view($_GET['id']) ,"comment" => $commentManager->getComment($_GET['id'])];
  		}
  		else{
  			/*créer une redirection page 404*/
@@ -39,6 +41,13 @@ class ControllerPost{
 
 	 		}
 	 	}
+ 	}
+
+ 	public static function addComment(){
+ 		if(!empty($_GET['post'])){
+ 			$commentManager = new \Modal\CommentManager();
+ 			$commentManager->addComment($_GET['post'],$_SESSION['id']);
+ 		}
  	}
 
  	public static function edit(){

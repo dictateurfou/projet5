@@ -1,24 +1,5 @@
 
 
-/*for var_dump show correctly*/
-
-pre.xdebug-var-dump{
-	width:80%;
-	position:absolute;
-	right:1em;
-}
-
-header{
-	width:85%;
-	position:absolute;
-	top:0em;
-	right:0em;
-}
-
-nav#menu a{
-	padding: 0.5em;
-	background: red;
-	font-size:1rem;
 
 
 
@@ -80,3 +61,9 @@ nav#menu a{
 }
 
 
+.info-comment{
+	width:50%;
+	position:absolute;
+	top:1em;
+	right:1em;
+}
