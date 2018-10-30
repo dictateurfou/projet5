@@ -12,7 +12,7 @@ $controller->addAction('editProfile/subAction',true,false);
 class ControllerAccount{
 
 	public static function defaut(){
-		/*echo var_dump("oki");*/
+		
 	}
 
 	/*return false si une érreure c'est produit*/
@@ -63,7 +63,7 @@ class ControllerAccount{
 	}
 
 	public static function connection(){
-		/*echo var_dump("connection");*/
+		
 		if(!empty($_POST['pass']) && !empty($_POST['name'])){
 			$pass = hash('sha256', $_POST['pass']);
 			$name = $_POST['name'];

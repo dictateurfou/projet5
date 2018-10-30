@@ -1,9 +1,6 @@
 <?php
 	session_start();
-	if(array_key_exists('id', $_SESSION)){
-		var_dump("connected");
 
-	}
 
 	require('Entity/Psr4AutoloaderClass.php');
 	$loader = new \Entity\Psr4AutoloaderClass;
