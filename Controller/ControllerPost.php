@@ -2,7 +2,6 @@
 
 /*LOAD ROUTE ACTION*/
 
-/*<route url="/news-(.+)-([0-9]+)\.html" module="News" action="show" vars="slug,id" />*/
 $controller->addAction('viewAll',false,false);
 $controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
@@ -85,4 +84,3 @@ class ControllerPost{
  	}
 
 }
-

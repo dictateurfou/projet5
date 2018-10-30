@@ -34,7 +34,6 @@ class Controller{
 		if($find == false){
 			header('Location: /'.self::DEFAULTPAGE.'/'.self::DEFAULTACTION);
 		}
-		/*$this->checkAction();*/
 	}
 	public function getvue(){
 		return $this->vue.self::EXTENSIONVIEW;

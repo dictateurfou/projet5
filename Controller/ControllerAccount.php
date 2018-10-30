@@ -19,7 +19,6 @@ class ControllerAccount{
 	public static function inscription(){
 		$error = false;
 		if(array_key_exists('name', $_POST)){
-			/*htmlspecialchars(*/
 				$name = htmlspecialchars($_POST['name']);
 				$mail = htmlspecialchars($_POST['mail']);
 				$pass = $_POST['pass'];
@@ -114,5 +113,3 @@ class ControllerAccount{
 
 
 }
-
-

@@ -33,7 +33,6 @@ class PostManager extends Manager{
 		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
 		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
 		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
-		/*$stmt->bindParam(':date',$date);*/
 		$stmt->execute();
 	}
 
