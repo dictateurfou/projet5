@@ -12,12 +12,12 @@ class CommentManager extends Manager{
 		return $utils->getObjectInObject("comment",["author"=>'user']);
 	}
 
-	public function addComment($post,$user){
+	public function addComment($post,$user,$content){
 		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("INSERT INTO `comment`(`author`, `post`, `content`, `date`, `valid`) VALUES (:author,:post,:content,'NOW()',false");
-		$stmt->bindParam(':author',$user, PDO::PARAM_INT);
-		$stmt->bindParam(':post',$post, PDO::PARAM_INT);
-		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+		$stmt = $cnx->prepare("INSERT INTO `comment`(`author`, `post`, `content`, `date`, `valid`) VALUES (:author,:post,:content,NOW(),0)");
+		$stmt->bindParam(':author',$user);
+		$stmt->bindParam(':post',$post);
+		$stmt->bindParam(':content',$content);
 		$stmt->execute();
 	}
 

@@ -20,7 +20,8 @@ class ControllerPost{
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
  			$commentManager = new \Modal\CommentManager();
- 			return ["article" => $postManager->view($_GET['id']) ,"comment" => $commentManager->getComment($_GET['id'])];
+ 			$test = ["article" => $postManager->view($_GET['id']) ,"comments" => $commentManager->getComment($_GET['id'])];
+ 			return $test;
  		}
  		else{
  			/*créer une redirection page 404*/
@@ -30,7 +31,6 @@ class ControllerPost{
  	public static function addPost(){
  		if(array_key_exists('image', $_FILES)){
  			$image = new \Entity\File($_FILES['image']);
-
 	 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
 	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
 	 			$target = 'post/'.$name;
@@ -44,9 +44,10 @@ class ControllerPost{
  	}
 
  	public static function addComment(){
- 		if(!empty($_GET['post'])){
+ 		if(!empty($_POST['content'])){
  			$commentManager = new \Modal\CommentManager();
- 			$commentManager->addComment($_GET['post'],$_SESSION['id']);
+ 			$commentManager->addComment($_GET['post'],$_SESSION['id'],$_POST['content']);
+ 			header('Location: /post/view/'.$_GET['post']);
  		}
  	}
 

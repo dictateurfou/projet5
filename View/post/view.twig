@@ -25,10 +25,16 @@
       </div>
 </article>
 
+
 <div class="container">
-<ul class="row">
-  <li class="col-lg-8 col-md-10 mx-auto"><p class="comment">voici mon commentaire</p><div class="info-comment"><p><a href="#">author</a></p> <p class="comment-date">20-10-2018 20h16</p></div></li>
-</ul>
+  <ul class="row">
+    {% for comment in comments %}
+      <li class="col-lg-8 col-md-10 mx-auto">
+        <p class="comment">{{comment.getContent()}}</p>
+        <div class="info-comment">par <a href="#">{{comment.getAuthor().getName()}}</a></span> <span class="comment-date"> le {{comment.getDate()}}</span></div>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
 
 <div class="container">

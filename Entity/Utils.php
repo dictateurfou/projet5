@@ -29,7 +29,6 @@ class Utils extends Manager
 			}
 		}
 		
-
 		$request = $request.$allias.$from." ".$join;
 
 		$cnx = $this->cnx();

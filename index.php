@@ -67,10 +67,10 @@
 	              <a class="nav-link" href="index.html">Acceuil</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="?post&action=viewAll">Blog</a>
+	              <a class="nav-link" href="/post/viewAll">Blog</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="post.html">Connection</a>
+	              <a class="nav-link" href="/account/connection">Connection</a>
 	            </li>
 
 	          </ul>

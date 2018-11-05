@@ -14,10 +14,6 @@ class Comment
         return get_object_vars($this);
     }
 
-    public function getAuthor(){
-    	return $this->author;
-    }
-
 	public function setId($id){
 		$this->id = $id;
 	}
@@ -44,6 +40,26 @@ class Comment
 
 	public function getId(){
 		return $this->id;
+	}
+
+	public function getAuthor(){
+		return $this->author;
+	}
+
+	public function getPost(){
+		return $this->post;
+	}
+
+	public function getContent(){
+		return $this->content;
+	}
+
+	public function getValid(){
+		return $this->valid;
+	}
+
+	public function getDate(){
+		return $this->date;
 	}
 
 
