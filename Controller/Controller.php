@@ -50,7 +50,7 @@ class Controller{
 		$userManager = new \Modal\UserManager();
 		$urlExplode = explode('/', $this->url);
 		$actionOffset = 1;
-		
+		$subAction = false;
 		/*si connecter on met le résultat de l'user en session pour un usage global*/
 		if(array_key_exists('id',$_SESSION)){
 			$_SESSION['user'] = $userManager->getUserById($_SESSION['id']);
@@ -86,7 +86,15 @@ class Controller{
 						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$actionExplode[0]) == false){
 							$find = false;
 						}
+						/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
 					}
+
+					/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
+					if(array_key_exists('restrictedSubAction', $this->action[$i]) && $find !== false && array_key_exists('id',$_SESSION) == true){
+						$userSubActionRight = $userManager->userHaveMultipleRight($this->route,$this->action[$i]['restrictedSubAction']);
+						$subAction = true;
+					}
+
 				}
 				$i++;
 			}
@@ -101,7 +109,10 @@ class Controller{
 			$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/../View');
 			$twig = new \Twig_Environment($loaderTwig);
 			$result = $className::$methodName();
-			if($result != null){
+			if($result !== null){
+				if($subAction == true){
+					$result["right"] = $userSubActionRight;
+				}
 				return $twig->render($this->vue.self::EXTENSIONVIEW, $result);
 			}
 			else{
@@ -110,13 +121,17 @@ class Controller{
 		}
 		
 	}
+
 	public function addRoute($name){
 			array_push($this->routeList,["name" => $name]);
 	}
-	public function addAction($name,$connected,$restricted){
+	public function addAction($name,$connected,$restricted,$restrictedSubAction = null){
 		if($this->action == false){
 			$this->action = [];
-			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted]);
+		}
+
+		if($restrictedSubAction !== null){
+			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted,'restrictedSubAction' => $restrictedSubAction]);
 		}
 		else{
 			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted]);

@@ -108,6 +108,34 @@ class UserManager extends Manager{
 		return $passed;
 	}
 
+	public function userHaveMultipleRight($route,$subAction){
+		$user = $_SESSION['user'];
+		$role = $user->getRole();
+		$cnx = $this->cnx();
+		$stmt = $cnx->prepare("SELECT * FROM user_right WHERE route = :route AND role = :role");
+		$stmt->bindParam(':route',$route);
+		$stmt->bindParam(':role',$role);
+		$stmt->execute();
+		$right = $stmt->fetchAll();
+		$actionRight = [];
+		/*init tab*/
+		$i = 0;
+		while($i < count($subAction)){
+			$actionRight[$subAction[$i]] = false;
+			$i++;
+		}
+
+		/*check action right*/
+		$i = 0;
+		while($i < count($right)){
+			if(array_key_exists($right[$i]['action'], $actionRight)){
+				$actionRight[$right[$i]['action']] = true;
+			}
+			$i++;
+		}
+		return $actionRight;
+	}
+
 	public function changePassword($pass){
 		$id = $_SESSION['id'];
 		$cnx = $this->cnx();

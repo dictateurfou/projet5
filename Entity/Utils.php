@@ -4,7 +4,7 @@ use PDO;
 use \Modal\Manager;
 class Utils extends Manager
 {
-	public function getObjectInObject(string $object,array $subObject,string $where = null,bool $limit = null){
+	public function getObjectInObject(string $object,array $subObject,string $cond = null){
 		$class = '\Entity\\'.ucfirst($object);
 		$request = "SELECT ".$object.".*,";
 		$allias = "";
@@ -29,7 +29,12 @@ class Utils extends Manager
 			}
 		}
 		
-		$request = $request.$allias.$from." ".$join;
+		if($cond !== null){
+			$request = $request.$allias.$from." ".$join." ".$cond;
+		}
+		else{
+			$request = $request.$allias.$from." ".$join;
+		}
 
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare($request);

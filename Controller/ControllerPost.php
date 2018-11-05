@@ -3,7 +3,7 @@
 /*LOAD ROUTE ACTION*/
 
 
-$controller->addAction('viewAll',false,false);
+$controller->addAction('viewAll',false,false,["edit","delete"]);
 $controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
 $controller->addAction('addComment/post',true,false);
@@ -85,7 +85,7 @@ class ControllerPost{
  			}
  		}
  	}
-
+ 	
  	public static function delete(){
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
