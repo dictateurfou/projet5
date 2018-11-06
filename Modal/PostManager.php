@@ -13,7 +13,7 @@ class PostManager extends Manager{
 
 	public function view($id){
 		$utils = new \Entity\Utils();
-		$post = $utils->getObjectInObject("post",["author"=>'user'],"WHERE post.id = ".$id);
+		$post = $utils->getObjectInObject("post",["author"=>'user'],"WHERE post.id = :id",[":id" => $id]);
 		if($post !== false){
 			$post = $post[0];
 		}

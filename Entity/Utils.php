@@ -4,7 +4,7 @@ use PDO;
 use \Modal\Manager;
 class Utils extends Manager
 {
-	public function getObjectInObject(string $object,array $subObject,string $cond = null){
+	public function getObjectInObject(string $object,array $subObject,string $cond = null,$param = null){
 		$class = '\Entity\\'.ucfirst($object);
 		$request = "SELECT ".$object.".*,";
 		$allias = "";
@@ -37,6 +37,11 @@ class Utils extends Manager
 		}
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare($request);
+		if($param !== null){
+			foreach ($param as $key => $value){
+			    $stmt->bindParam($key,$value);
+			}
+		}
 		$stmt->execute();
 		$result = $stmt->fetchAll();
 
