@@ -20,7 +20,10 @@ class ControllerPost{
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
  			$commentManager = new \Modal\CommentManager();
- 			$test = ["article" => $postManager->view($_GET['id']) ,"comments" => $commentManager->getComment($_GET['id'])];
+ 			$article = $postManager->view($_GET['id']);
+ 			$test = ["header" => ["view" => "header/post.twig","article" => $article,"user"=> $article->getAuthor()],
+ 			"article" => $postManager->view($_GET['id']),
+ 			"comments" => $commentManager->getComment($_GET['id'])];
  			return $test;
  		}
  		else{

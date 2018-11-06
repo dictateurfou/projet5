@@ -9,10 +9,15 @@ class Controller{
 	private $routeList = [];
 	private $action = false;
 	private $url;
+	private $header = [];
 	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.twig';
 	const DEFAULTPAGE = 'post';
 	const DEFAULTACTION = 'viewAll';
+	const DEFAULTBANNER = "/assets/img/home-bg.jpg";
+	const DEFAULT_TITLE = "Mon Blog";
+	const DEFAULTSUBTITLE = "Un blog parlant de devellopement";
+	const DEFAULTHEADER = "header/default.twig";
 	public function __construct(){
 		$this->url = ltrim($_SERVER['REQUEST_URI'],'/');
 	}
@@ -42,6 +47,19 @@ class Controller{
 	public function getController(){
 		return $this->controller.self::EXTENSIONCLASSE;
 	}
+
+	public function setHeader($header){
+		$this->header = $header;
+	}
+
+	public function getHeader(){
+		return $this->header;
+	}
+
+	public function renderHeader(){
+
+	}
+
 	public function render(){
 		$find = false;
 		$i = 0;
@@ -113,7 +131,11 @@ class Controller{
 				if($subAction == true){
 					$result["right"] = $userSubActionRight;
 				}
-				return $twig->render($this->vue.self::EXTENSIONVIEW, $result);
+				if(array_key_exists('header', $result) == false){
+					$result["header"] = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
+				}
+				/*verifier array key header (retour de className::methodName)*/
+				return $twig->render($result["header"]["view"], $result["header"]).$twig->render($this->vue.self::EXTENSIONVIEW, $result);
 			}
 			else{
 				return $twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
