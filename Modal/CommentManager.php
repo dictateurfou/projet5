@@ -8,7 +8,6 @@ class CommentManager extends Manager{
 
 	public function getComment($post){
 		$utils = new \Entity\Utils();
-		$test = $utils->getObjectInObject("comment",["author"=>'user'],'WHERE comment.post = '.$post);
 		return $utils->getObjectInObject("comment",["author"=>'user'],'WHERE comment.post = '.$post);
 	}
 

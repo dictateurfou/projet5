@@ -1,5 +1,4 @@
 <?php
-
 /*LOAD ROUTE ACTION*/
 
 
@@ -21,10 +20,15 @@ class ControllerPost{
  			$postManager = new \Modal\PostManager();
  			$commentManager = new \Modal\CommentManager();
  			$article = $postManager->view($_GET['id']);
- 			$test = ["header" => ["view" => "header/post.twig","article" => $article,"user"=> $article->getAuthor()],
- 			"article" => $postManager->view($_GET['id']),
- 			"comments" => $commentManager->getComment($_GET['id'])];
- 			return $test;
+ 			if($article !== false){
+ 				$test = ["header" => ["view" => "header/post.twig","article" => $article,"user"=> $article->getAuthor()->getName()],
+	 			"article" => $article,
+	 			"comments" => $commentManager->getComment($_GET['id'])];
+	 			return $test;
+ 			}
+ 			else{
+ 				header('Location: /index.php');
+ 			}
  		}
  		else{
  			/*créer une redirection page 404*/

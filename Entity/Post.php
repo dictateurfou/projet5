@@ -12,6 +12,10 @@ class Post
 	private $createdAt;
 	private $editedAt;
 
+    public function getProperties(){
+        return get_object_vars($this);
+    }
+
 	public function getId(){
 		return $this->id;
 	}

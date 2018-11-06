@@ -35,7 +35,6 @@ class Utils extends Manager
 		else{
 			$request = $request.$allias.$from." ".$join;
 		}
-
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare($request);
 		$stmt->execute();
@@ -75,6 +74,9 @@ class Utils extends Manager
 			$i++;
 		}
 
+		if(empty($objectTab) == true){
+			$objectTab = false;
+		}
 		return $objectTab;
 
 		/*foreach ($donnees as $key => $value){

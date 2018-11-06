@@ -6,23 +6,20 @@ use PDO;
 class PostManager extends Manager{
 
 	public function viewAll(){
-		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("SELECT * FROM post");
-		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\Post');
-		$post = $stmt->fetchAll();
-		return $post;
-				
+		$utils = new \Entity\Utils();
+		$post = $utils->getObjectInObject("post",["author"=>'user']);
+		return $post;		
 	}
 
 	public function view($id){
-		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("SELECT * FROM post WHERE id = :id");
-		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
-		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\Post');
-		$post = $stmt->fetch();
+		$utils = new \Entity\Utils();
+		$post = $utils->getObjectInObject("post",["author"=>'user'],"WHERE post.id = ".$id);
+		if($post !== false){
+			$post = $post[0];
+		}
+
 		return $post;
+
 	}
 
 	public function addPost($title,$image,$content){
