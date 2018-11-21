@@ -23,14 +23,15 @@ class PostManager extends Manager{
 	}
 
 	public function addPost($title,$image,$content){
+		$author = $_SESSION['user']->getId();
 		$cnx = $this->cnx();
 		$date = date('Y-m-d h:m:s');
-		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,'test',NOW(),NOW())");
+		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,:author,NOW(),NOW())");
 
 		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
 		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
 		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
-		/*$stmt->bindParam(':date',$date);*/
+		$stmt->bindParam(':author',$author, PDO::PARAM_INT);
 		$stmt->execute();
 	}
 

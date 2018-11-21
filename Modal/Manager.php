@@ -10,9 +10,9 @@ abstract class Manager{
 	function __construct(){
 		$json = file_get_contents('./config.json');
 		$json_data = json_decode($json,true);
-		$this->dsn = $json_data['dsn'];
-		$this->user = $json_data['user'];
-		$this->pass = $json_data['pass'];
+		$this->dsn = $json_data['bdd']['dsn'];
+		$this->user = $json_data['bdd']['user'];
+		$this->pass = $json_data['bdd']['pass'];
 	}
 
 	protected function cnx(){

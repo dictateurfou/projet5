@@ -4,7 +4,6 @@
 
 $controller->addAction('viewAll',false,false,["edit","delete"]);
 $controller->addAction("view/id",false,false);
-$controller->addAction('addPost',true,true);
 $controller->addAction('addComment/post',true,false);
 $controller->addAction('edit/id',true,true);
 $controller->addAction('delete/id',true,true);
@@ -35,20 +34,6 @@ class ControllerPost{
  		}
  	}
 
- 	public static function addPost(){
- 		if(array_key_exists('image', $_FILES)){
- 			$image = new \Entity\File($_FILES['image']);
-	 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
-	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
-	 			$target = 'post/'.$name;
-	 			$image->changeFolder($target);
-	 			$postManager = new \Modal\PostManager();
-	 			/* mettre post en objet */
-	 			$postManager->addPost($_POST['title'],$target,$_POST['content']);
-
-	 		}
-	 	}
- 	}
 
  	public static function addComment(){
  		if(!empty($_POST['content'])){

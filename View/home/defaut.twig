@@ -1,0 +1,60 @@
+{% extends 'defaultLayer.twig' %}
+{% block content %}
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <section id="info">
+          <a href="https://github.com/dictateurfou"><i class="fab fa-github"></i> github</a>
+          <a href="https://www.linkedin.com/in/steven-hervy-67416a157/"> <i class="fab fa-linkedin"></i> linkdin</a>
+          <a href="https://codestats.net/users/dictateurfou"><i class="fas fa-code"></i> code stats</a>
+      </section>
+
+
+      <h3>Entrez le contenu de votre message.</h3>
+      <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+      <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+      <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+      <form action="/home" method="POST" name="addPost" id="contactForm">
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Sujet</label>
+            <input name="subject" type="text" class="form-control" placeholder="Sujet" id="title" required data-validation-required-message="Entrez votre sujet">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Nom/Prénom</label>
+            <input name="name" type="text" class="form-control" placeholder="Nom/Prénom" id="title" required data-validation-required-message="Entrez votre Nom/Prenom">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Email</label>
+            <input name="mail" type="text" class="form-control" placeholder="Email" id="title" required data-validation-required-message="Entrez votre Email">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+ 
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <label>Contenu</label>
+            <textarea name="content" rows="5" class="form-control" placeholder="Contenu" id="content" required data-validation-required-message="Entrez votre contenu"></textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

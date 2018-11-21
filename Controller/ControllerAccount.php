@@ -62,6 +62,8 @@ class ControllerAccount{
 		
 	}
 
+	
+
 	public static function connection(){
 		/*echo var_dump("connection");*/
 		if(!empty($_POST['pass']) && !empty($_POST['name'])){

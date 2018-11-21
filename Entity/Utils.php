@@ -11,16 +11,20 @@ class Utils extends Manager
 		$from = " FROM ".$object;
 		$i = 0;
 		$join = "";
+		$firstPassed = false;
 		foreach ($subObject as $key => $value){
-			$join = $join."INNER JOIN ".$value." ON ".$object.".".$key." = ".$value.".id";
+
+			$join = $join." INNER JOIN ".$value." ON ".$object.".".$key." = ".$value.".id";
+
 			$subClass = '\Entity\\'.ucfirst($value);
 			$subEntity = new $subClass;
 			$properties = $subEntity->getProperties();
 			$e = 0;
 
 			foreach ($properties as $key2 => $value2){
-				if($e == 0){
+				if($e == 0 && $firstPassed == false){
 					$allias = $allias.$value.".".$key2." AS ".$value."_".$key2;
+					$firstPassed = true;
 				}
 				else{
 					$allias = $allias.",".$value.".".$key2." AS ".$value."_".$key2;
@@ -30,7 +34,7 @@ class Utils extends Manager
 		}
 		
 		if($cond !== null){
-			$request = $request.$allias.$from." ".$join." ".$cond;
+			$request = $request.$allias.$from."".$join." ".$cond;
 		}
 		else{
 			$request = $request.$allias.$from." ".$join;
