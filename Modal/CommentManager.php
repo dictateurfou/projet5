@@ -13,7 +13,7 @@ class CommentManager extends Manager{
 
 	public function addComment($post,$user,$content){
 		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("INSERT INTO `comment`(`author`, `post`, `content`, `date`, `valid`) VALUES (:author,:post,:content,NOW(),0)");
+		$stmt = $cnx->prepare("INSERT INTO `comment`(`author`, `post`, `content`, `date`, `valid`) VALUES (:author,:post,:content,NOW(),'no')");
 		$stmt->bindParam(':author',$user);
 		$stmt->bindParam(':post',$post);
 		$stmt->bindParam(':content',$content);
