@@ -66,7 +66,7 @@ class ControllerAccount{
 
 	public static function connection(){
 		/*echo var_dump("connection");*/
-		if(empty($_POST['pass']) === false && empty($_POST['name']) === false){
+		if(empty($_POST['pass']) === false){
 			$pass = hash('sha256', $_POST['pass']);
 			$name = $_POST['name'];
 			$userManager = new Modal\UserManager();
