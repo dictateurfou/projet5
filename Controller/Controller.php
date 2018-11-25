@@ -56,9 +56,6 @@ class Controller{
 		return $this->header;
 	}
 
-	public function renderHeader(){
-
-	}
 
 	public function render(){
 		$find = false;
