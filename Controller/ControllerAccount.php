@@ -18,7 +18,7 @@ class ControllerAccount{
 	/*return false si une érreure c'est produit*/
 	public static function inscription(){
 		$error = false;
-		if(array_key_exists('name', $_POST)){
+		if(array_key_exists('name', $_POST) === true){
 			/*htmlspecialchars(*/
 				$name = htmlspecialchars($_POST['name']);
 				$mail = htmlspecialchars($_POST['mail']);
