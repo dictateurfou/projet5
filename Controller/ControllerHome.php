@@ -11,13 +11,13 @@ class ControllerHome{
 		$empty = false;
 		$i = 0;
 		while($i < count($input)){
-			if(empty($_POST[$input[$i]]) == true){
+			if(empty($_POST[$input[$i]]) === true){
 				$empty = true;
 			}
 			$i++;
 		}
 
-		if($empty == false){
+		if($empty === false){
 			$json = file_get_contents('./config.json');
 			$json_data = json_decode($json,true);
 			$transport = (new Swift_SmtpTransport($json_data['smtp']['url'], $json_data['smtp']['port'],$json_data['smtp']['protocol']))
