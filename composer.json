@@ -1,4 +1,6 @@
 {
+    "name": "blog",
+    "description": "projet de cour",
     "require": {
         "twig/twig": "^2.0",
         "swiftmailer/swiftmailer": "^6.1"
