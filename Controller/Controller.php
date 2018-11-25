@@ -158,10 +158,10 @@ class Controller{
 			$twig = new \Twig_Environment($loaderTwig);
 			$result = $className::$methodName();
 			if($result !== null){
-				if($subAction == true){
+				if($subAction === true){
 					$result["right"] = $userSubActionRight;
 				}
-				if(array_key_exists('header', $result) == false){
+				if(array_key_exists('header', $result) === false){
 					$result["header"] = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
 				}
 				/*verifier array key header (retour de className::methodName)*/
