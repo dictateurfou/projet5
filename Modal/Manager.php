@@ -1,6 +1,6 @@
 <?php
 namespace Modal;
-use PDO;
+
 abstract class Manager{
 
 	private $dsn;
