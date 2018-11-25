@@ -1,11 +1,6 @@
 {
-    "name": "tp/blog",
-    "description": "projet de cour",
-    "homepage": "http://projet5.survive-in-hell.fr",
- 	"author": "dictateurfou",
-
     "require": {
         "twig/twig": "^2.0",
-        "swiftmailer/swiftmailer": "^6.1",
+        "swiftmailer/swiftmailer": "^6.1"
     }
 }
