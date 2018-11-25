@@ -30,11 +30,11 @@ class Utils extends Manager
 			}
 		}
 		
-		if($cond !== null){
-			$request = $request.$allias.$from."".$join." ".$cond;
+		if($cond === null){
+			$request = $request.$allias.$from." ".$join;
 		}
 		else{
-			$request = $request.$allias.$from." ".$join;
+			$request = $request.$allias.$from."".$join." ".$cond;
 		}
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare($request);
