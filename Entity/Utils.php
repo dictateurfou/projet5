@@ -1,7 +1,7 @@
 <?php
 namespace Entity;
 use PDO;
-use \Modal\Manager;
+
 class Utils extends Manager
 {
 	public function getObjectInObject(string $object,array $subObject,string $cond = null,$param = null){
