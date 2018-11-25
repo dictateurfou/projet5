@@ -72,7 +72,7 @@ class Controller{
 		$defautAction = false;
 		$actionIndex;
 
-		if(array_key_exists($actionOffset,$urlExplode) == false){
+		if(array_key_exists($actionOffset,$urlExplode) === false){
 			$urlExplode[1] = "";
 			$defautAction = true;
 			if($urlExplode[0] !== "adminPanel"){
@@ -122,14 +122,14 @@ class Controller{
 						if(!array_key_exists('id',$_SESSION)){
 							$find = false;
 						}
-						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$actionExplode[0]) == false){
+						else if($this->action[$i]["restricted"] === true && $userManager->userHaveRight($this->route,$actionExplode[0]) === false){
 							$find = false;
 						}
 						/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
 					}
 
 					/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
-					if(array_key_exists('restrictedSubAction', $this->action[$i]) && $find !== false && array_key_exists('id',$_SESSION) == true){
+					if(array_key_exists('restrictedSubAction', $this->action[$i]) && $find !== false && array_key_exists('id',$_SESSION) === true){
 						$userSubActionRight = $userManager->userHaveMultipleRight($this->route,$this->action[$i]['restrictedSubAction']);
 						$subAction = true;
 					}
