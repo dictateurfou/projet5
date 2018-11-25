@@ -51,7 +51,7 @@ class Utils extends Manager
 			$tempClass = new $class;
 			$createdClass = [];
 			foreach ($result[$i] as $key => $value){
-				if(strpos($key, '_') == false){
+				if(strpos($key, '_') === false){
 					$method = 'set'.ucfirst($key);
 					if (method_exists($tempClass, $method)){
 					  $tempClass->$method($value);
@@ -76,7 +76,7 @@ class Utils extends Manager
 			array_push($objectTab,$tempClass);
 			$i++;
 		}
-		if(empty($objectTab) == true){
+		if(empty($objectTab) === true){
 			$objectTab = false;
 		}
 		return $objectTab;
