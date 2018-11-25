@@ -7,7 +7,7 @@ abstract class Manager{
 	private $user;
 	private $pass;
 
-	function __construct(){
+	public function __construct(){
 		$json = file_get_contents('./config.json');
 		$json_data = json_decode($json,true);
 		$this->dsn = $json_data['bdd']['dsn'];
