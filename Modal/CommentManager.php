@@ -1,6 +1,6 @@
 <?php
 namespace Modal;
-use PDO;
+
 
 class CommentManager extends Manager{
 
