@@ -1,4 +1,9 @@
 {
+
+    "name": "blog",
+    "description": "projet de cour",
+    "homepage": "http://projet5.survive-in-hell.fr",
+
     "require": {
         "twig/twig": "^2.0",
         "swiftmailer/swiftmailer": "^6.1"
