@@ -2,21 +2,7 @@
     "name": "blog",
     "description": "projet de cour",
     "homepage": "http://projet5.survive-in-hell.fr",
-      "authors": [
-    {
-      "name": "Adam Piotrowski",
-      "email": "sqdqds@fdggdfdgf.fr"
-    },
-    {
-      "name": "WellCommerce Developers",
-      "email": "developers@wellcommerce.org"
-    }
-  ],
-  "support": {
-    "email": "support@wellcommerce.org",
-    "issues": "https://github.com/WellCommerce/WellCommerce/issues",
-    "source": "https://github.com/WellCommerce/WellCommerce/"
-  },
+ 	"author": "dictateurfou",
 
     "require": {
         "twig/twig": "^2.0",
