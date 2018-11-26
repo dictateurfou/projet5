@@ -1,8 +1,7 @@
 <?php
 namespace Modal;
-use PDO;
 
-class UserManager extends Manager{
+class UserManager{
 
 
 //ajouter edit
