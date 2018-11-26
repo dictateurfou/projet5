@@ -23,7 +23,7 @@ class PostManager extends Manager{
 	}
 
 	public function addPost($title,$image,$content){
-		$author = $_SESSION['user']->getId();
+		/*$author = $_SESSION['user']->getId();*/
 		$cnx = $this->cnx();
 		$date = date('Y-m-d h:m:s');
 		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,:author,NOW(),NOW())");
