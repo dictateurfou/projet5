@@ -12,6 +12,10 @@ class User
 	private $role;
 	private $validate;
 
+    public function getProperties(){
+        return get_object_vars($this);
+    }
+
 	public function getId(){
 		return $this->id;
 	}
@@ -29,7 +33,7 @@ class User
 	}
 
 	public function getAvatar(){
-		return $this->image;
+		return $this->avatar;
 	}
 
 	public function getRole(){
@@ -57,7 +61,7 @@ class User
 	}
 
 	public function setAvatar($arg){
-		$this->image = $arg;
+		$this->avatar = $arg;
 	}
 
 	public function setRole($arg){

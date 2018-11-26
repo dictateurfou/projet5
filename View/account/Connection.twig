@@ -1,3 +1,6 @@
+{% extends 'defaultLayer.twig' %}
+{% block content %}
+
 {% if connect is not empty %}
     <p>{{connect}}</p>
 {% endif %}
@@ -59,3 +62,5 @@
         </div>
       </form>
 </div>
+
+{% endblock %}

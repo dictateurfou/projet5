@@ -2,6 +2,7 @@
 namespace Controller;
 /*for twig component*/
 require_once("vendor/autoload.php");
+
 class Controller{
 	private $vue;
 	private $controller;
@@ -9,10 +10,15 @@ class Controller{
 	private $routeList = [];
 	private $action = false;
 	private $url;
+	private $header = [];
 	const EXTENSIONCLASSE = '.php';
 	const EXTENSIONVIEW = '.twig';
 	const DEFAULTPAGE = 'post';
 	const DEFAULTACTION = 'viewAll';
+	const DEFAULTBANNER = "/assets/img/home-bg.jpg";
+	const DEFAULT_TITLE = "Mon Blog";
+	const DEFAULTSUBTITLE = "Un blog parlant de développement";
+	const DEFAULTHEADER = "header/default.twig";
 	public function __construct(){
 		$this->url = ltrim($_SERVER['REQUEST_URI'],'/');
 	}
@@ -41,6 +47,16 @@ class Controller{
 	public function getController(){
 		return $this->controller.self::EXTENSIONCLASSE;
 	}
+
+	public function setHeader($header){
+		$this->header = $header;
+	}
+
+	public function getHeader(){
+		return $this->header;
+	}
+
+
 	public function render(){
 		$find = false;
 		$i = 0;
@@ -49,15 +65,28 @@ class Controller{
 		$userManager = new \Modal\UserManager();
 		$urlExplode = explode('/', $this->url);
 		$actionOffset = 1;
-		
+		$subAction = false;
+		$defautAction = false;
+		$actionIndex;
+
+		if(array_key_exists($actionOffset,$urlExplode) === false){
+			$urlExplode[1] = "";
+			$defautAction = true;
+			if($urlExplode[0] !== "adminPanel"){
+				$this->vue = $urlExplode[0]."/defaut";
+			}
+			else{
+				$this->vue = "/defaut";
+			}
+		}
 		/*si connecter on met le résultat de l'user en session pour un usage global*/
 		if(array_key_exists('id',$_SESSION)){
 			$_SESSION['user'] = $userManager->getUserById($_SESSION['id']);
 		}
 		if(array_key_exists($actionOffset,$urlExplode)){
 			while($i < count($this->action)){
+
 				$actionExplode = explode('/', $this->action[$i]["name"]);
-			
 				/*si l'action contient des paramètre on lui attribut au tableau get et sont défini dans l'url actuelle*/
 				if(isset($urlExplode[2]) && strpos($this->action[$i]["name"], "/") !== false){
 					$this->action[$i]["name"] = $actionExplode[0];
@@ -74,18 +103,34 @@ class Controller{
 				/* ici on check si l'action correspond a l'url */
 				if($urlExplode[$actionOffset] == $this->action[$i]["name"]){
 					$className = $this->controller;
-					$methodName = $this->action[$i]["name"];
-					$this->vue = $this->vue.$this->action[$i]["name"];
+					/*si on es sur l'action par défaut*/
+					if($defautAction == false){
+						$methodName = $this->action[$i]["name"];
+						$this->vue = $this->vue.$this->action[$i]["name"];
+						$actionIndex = $i;
+					}
+					else{
+						$this->vue = $this->vue.$this->action[$i]["name"];
+						$actionIndex = $i;
+					}
 					$find = true;
 					//required connect
 					if($this->action[$i]["connected"] == true){
 						if(!array_key_exists('id',$_SESSION)){
 							$find = false;
 						}
-						else if($this->action[$i]["restricted"] == true && $userManager->userHaveRight($this->route,$actionExplode[0]) == false){
+						else if($this->action[$i]["restricted"] === true && $userManager->userHaveRight($this->route,$actionExplode[0]) === false){
 							$find = false;
 						}
+						/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
 					}
+
+					/*check les droit des action secondaire pour savoir si on affiche les boutton dans twig*/
+					if(array_key_exists('restrictedSubAction', $this->action[$i]) && $find !== false && array_key_exists('id',$_SESSION) === true){
+						$userSubActionRight = $userManager->userHaveMultipleRight($this->route,$this->action[$i]['restrictedSubAction']);
+						$subAction = true;
+					}
+
 				}
 				$i++;
 			}
@@ -97,25 +142,75 @@ class Controller{
 		}
 		/*sinon (condition obliger sinon éxecute quand même l'action avant redirection)*/
 		else{
-			$loaderTwig = new \Twig_Loader_Filesystem(__DIR__.'/../View');
-			$twig = new \Twig_Environment($loaderTwig);
-			$result = $className::$methodName();
-			if($result != null){
-				return $twig->render($this->vue.self::EXTENSIONVIEW, $result);
+			$nav = "";
+			/*si on doit rajouter une aplication rajouter une condition*/
+			if($urlExplode[0] == "adminPanel"){
+				if($this->vue !== "/defaut"){
+					$this->vue = $this->action[$actionIndex]["name"];
+				}
+
+				$loaderTwig = new \Twig_Loader_Filesystem('./View/adminPanel');
+				$twig = new \Twig_Environment($loaderTwig);
 			}
 			else{
-				return $twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
+				$loaderTwig = new \Twig_Loader_Filesystem('./View');
+				$twig = new \Twig_Environment($loaderTwig);
+				if(array_key_exists('id',$_SESSION) === true){
+					if($userManager->userHaveRight("adminPanel",'') === true){
+						$nav = $twig->render('menu/adminMenu'.self::EXTENSIONVIEW,[]);
+
+					}
+					else{
+						$nav = $twig->render('menu/connected'.self::EXTENSIONVIEW,[]);
+					}
+				}
+				else{
+					
+					$nav = $twig->render('menu/default'.self::EXTENSIONVIEW,[]);
+				}
+			}
+
+			if($methodName === ""){
+				$result = $className::defaut();
+				if($urlExplode[0] == "adminPanel"){
+					$this->vue = "defaut";
+				}
+				else{
+					$this->vue = $urlExplode[0].'/defaut';
+				}
+			}
+			else{
+				$result = $className::$methodName();
+			}
+			
+
+			if($result !== null){
+				if($subAction === true){
+					$result["right"] = $userSubActionRight;
+				}
+				if(array_key_exists('header', $result) === false){
+					$result["header"] = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
+				}
+				/*verifier array key header (retour de className::methodName)*/
+				return $nav.$twig->render($result["header"]["view"],$result["header"]).$twig->render($this->vue.self::EXTENSIONVIEW, $result);
+			}
+			else{
+				$header = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
+				return $nav.$twig->render($header["view"], $header).$twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
 			}
 		}
-		
 	}
+
 	public function addRoute($name){
-			array_push($this->routeList,["name" => $name]);
+		array_push($this->routeList,["name" => $name]);
 	}
-	public function addAction($name,$connected,$restricted){
+	public function addAction($name,$connected,$restricted,$restrictedSubAction = null){
 		if($this->action == false){
 			$this->action = [];
-			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted]);
+		}
+
+		if($restrictedSubAction !== null){
+			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted,'restrictedSubAction' => $restrictedSubAction]);
 		}
 		else{
 			array_push($this->action,["name" => $name,"connected" => $connected,'restricted' => $restricted]);

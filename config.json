@@ -1,0 +1,14 @@
+{
+	"bdd" : {
+		"dsn" : "mysql:dbname=projet5;host=localhost",
+		"user" : "root",
+		"pass" : ""
+	},
+	"smtp" : {
+		"url" : "ssl0.ovh.net",
+		"port" : 465,
+		"protocol" : "ssl",
+		"username" : "",
+		"pass" : ""
+	}
+}

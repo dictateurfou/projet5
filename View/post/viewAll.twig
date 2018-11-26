@@ -1,3 +1,6 @@
+{% extends 'defaultLayer.twig' %}
+{% block content %}
+
 <div class="container">
 
   <div class="row">
@@ -9,14 +12,18 @@
                   {{article.getTitle()}}
                 </h2>
                 <p class="post-subtitle">
-                  {{article.getContent()|slice(1, 200)}} ...
+                  {{article.getContent()|slice(0, 200)}} ...
                 </p>
               </a>
               <p class="post-meta">Poster par
-                <a href="#">{{article.getAuthor()}}</a>
+                <a href="#">{{article.getAuthor().getName()}}</a>
                 le {{article.getCreatedAt()}}</p>
-                <a href="/post/edit/{{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
-                <a href="/post/delete/{{article.getId()}}"><button type="button" class="btn btn-danger">Suprimer</button></a>
+                {% if right['edit'] == true %}
+                  <a href="/post/edit/{{article.getId()}}"><button type="button" class="btn btn-primary">Modifier</button></a>
+                {% endif %}
+                {% if right['delete'] == true %}
+                  <a href="/post/delete/{{article.getId()}}"><button type="button" class="btn btn-danger">Suprimer</button></a>
+                {% endif %}
             </div>
             <hr>
       {% endfor %}
@@ -27,4 +34,4 @@
           </div>
   </div>
 </div>
-
+{% endblock %}

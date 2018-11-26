@@ -1,0 +1,17 @@
+{% extends 'layer.twig' %}
+{% block content %}
+	 <div class=" accountValidation">
+		<ul>
+			{% if comments != false %}
+			    {% for comment in comments %}
+			    	<li class="row"><span class="user-name col-xs-12 col-md-12" >{{comment.getContent()}}</span>
+			    		<div class="btn-validation col-xs-12 col-md-12">
+				    		<a href="/adminPanel/commentValidation/true/{{comment.getId()}}" class="btn btn-success btn-valid" role="button">Valider</a>
+				    		<a href="/adminPanel/commentValidation/false/{{comment.getId()}}" class="btn btn-danger btn-valid" role="button" >Refuser</a>
+				    	</div>
+			    	</li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+{% endblock %}
