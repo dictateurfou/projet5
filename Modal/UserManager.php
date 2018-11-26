@@ -59,14 +59,7 @@ class UserManager extends Manager{
 		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$user = $stmt->fetch();
-		if($user !== false and $user->getValidate() == 'yes'){
-			$_SESSION['id'] = $user->getId();
-			$_SESSION['user'] = $user;
-			return true;
-		}
-		else{
-			return false;
-		}
+	
 	}
 
 	public function validate($bool,$id){
@@ -93,8 +86,7 @@ class UserManager extends Manager{
 
 	public function userHaveRight($route,$action){
 		$passed = false;
-		$user = $_SESSION['user'];
-		$role = $user->getRole();
+	
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare("SELECT * FROM user_right WHERE action = :action AND route = :route AND role = :role");
 		$stmt->bindParam(':action',$action);
@@ -109,8 +101,7 @@ class UserManager extends Manager{
 	}
 
 	public function userHaveMultipleRight($route,$subAction){
-		$user = $_SESSION['user'];
-		$role = $user->getRole();
+	
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare("SELECT * FROM user_right WHERE route = :route AND role = :role");
 		$stmt->bindParam(':route',$route);
