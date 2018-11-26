@@ -143,18 +143,45 @@ class Controller{
 		}
 		/*sinon (condition obliger sinon éxecute quand même l'action avant redirection)*/
 		else{
+			$nav = "";
 			/*si on doit rajouter une aplication rajouter une condition*/
 			if($urlExplode[0] == "adminPanel"){
 				if($this->vue !== "/defaut"){
 					$this->vue = $this->action[$actionIndex]["name"];
 				}
+
 				$loaderTwig = new \Twig_Loader_Filesystem('./View/adminPanel');
+				$twig = new \Twig_Environment($loaderTwig);
 			}
 			else{
 				$loaderTwig = new \Twig_Loader_Filesystem('./View');
+				$twig = new \Twig_Environment($loaderTwig);
+				if(array_key_exists('id',$_SESSION) === true){
+					if($userManager->userHaveRight("adminPanel",'') === true){
+						$nav = $twig->render('menu/adminMenu'.self::EXTENSIONVIEW,[]);
+
+					}
+					else{
+						$nav = $twig->render('menu/connected'.self::EXTENSIONVIEW,[]);
+					}
+				}
+				else{
+					
+					$nav = $twig->render('menu/default'.self::EXTENSIONVIEW,[]);
+				}
 			}
-			$twig = new \Twig_Environment($loaderTwig);
-			$result = $className::$methodName();
+
+			if($methodName === ""){
+				$result = $className::defaut();
+				if($urlExplode[0] == "adminPanel"){
+					$this->vue = "defaut";
+				}
+			}
+			else{
+				$result = $className::$methodName();
+			}
+			
+
 			if($result !== null){
 				if($subAction === true){
 					$result["right"] = $userSubActionRight;
@@ -163,11 +190,11 @@ class Controller{
 					$result["header"] = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
 				}
 				/*verifier array key header (retour de className::methodName)*/
-				return $twig->render($result["header"]["view"], $result["header"]).$twig->render($this->vue.self::EXTENSIONVIEW, $result);
+				return $nav.$twig->render($result["header"]["view"],$result["header"]).$twig->render($this->vue.self::EXTENSIONVIEW, $result);
 			}
 			else{
 				$header = ["view" => self::DEFAULTHEADER,"title" => self::DEFAULT_TITLE,"subtitle" => self::DEFAULTSUBTITLE,"img" => self::DEFAULTBANNER];
-				return $twig->render($header["view"], $header).$twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
+				return $nav.$twig->render($header["view"], $header).$twig->render($this->vue.self::EXTENSIONVIEW, ["nothing" => ""]);
 			}
 		}
 	}

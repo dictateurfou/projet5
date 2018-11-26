@@ -51,6 +51,7 @@ class UserManager extends Manager{
 		return $user;
 	}
 
+
 	public function connect($name,$pass){
 		$cnx = $this->cnx();
 

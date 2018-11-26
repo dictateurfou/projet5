@@ -6,6 +6,7 @@ $controller->addAction('inscription',false,false);
 $controller->addAction('connection',false,false);
 $controller->addAction('validation/state/id', true,true);
 $controller->addAction('editProfile/subAction',true,false);
+$controller->addAction('disconnect',false,false);
 
 
 
@@ -92,6 +93,12 @@ class ControllerAccount{
 
 	public static function PasswordMissing($mail){
 
+	}
+
+
+	public function disconnect(){
+		session_destroy();
+		header('location:/');
 	}
 
 	public static function editProfile(){
