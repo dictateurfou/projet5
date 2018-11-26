@@ -28,10 +28,10 @@ class PostManager extends Manager{
 		$date = date('Y-m-d h:m:s');
 		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,:author,NOW(),NOW())");
 
-		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
-		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
-		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
-		$stmt->bindParam(':author',$author, PDO::PARAM_INT);
+		$stmt->bindParam(':title',$title);
+		$stmt->bindParam(':image',$image);
+		$stmt->bindParam(':content',$content);
+		$stmt->bindParam(':author',$author);
 		$stmt->execute();
 	}
 
@@ -40,14 +40,14 @@ class PostManager extends Manager{
 		
 		if($image !== null){
 			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content, `image` = :image,`editedAt` = NOW() WHERE `id` = :id");
-			$stmt->bindParam(':image',$image, PDO::PARAM_STR);
+			$stmt->bindParam(':image',$image);
 		}
 		else{
 			$stmt = $cnx->prepare("UPDATE post SET `title` = :title,`content` = :content,`editedAt` = NOW() WHERE `id` = :id");
 		}
 
-		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
-		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+		$stmt->bindParam(':title',$title);
+		$stmt->bindParam(':content',$content);
 		$stmt->bindParam(':id',$id);
 		$stmt->execute();
 
@@ -56,7 +56,7 @@ class PostManager extends Manager{
 	public function delete($id){
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare("DELETE FROM `post` WHERE id = :id");
-		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
+		$stmt->bindParam(':id',$id);
 		$stmt->execute();
 	}
 }
