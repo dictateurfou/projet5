@@ -6,19 +6,21 @@ $controller->addAction('inscription',false,false);
 $controller->addAction('connection',false,false);
 $controller->addAction('validation/state/id', true,true);
 $controller->addAction('editProfile/subAction',true,false);
+$controller->addAction('disconnect',false,false);
 
 
 
 class ControllerAccount{
 
 	public static function defaut(){
-		
+		/*echo var_dump("oki");*/
 	}
 
 	/*return false si une érreure c'est produit*/
 	public static function inscription(){
 		$error = false;
-		if(array_key_exists('name', $_POST)){
+		if(array_key_exists('name', $_POST) === true){
+			/*htmlspecialchars(*/
 				$name = htmlspecialchars($_POST['name']);
 				$mail = htmlspecialchars($_POST['mail']);
 				$pass = $_POST['pass'];
@@ -61,9 +63,11 @@ class ControllerAccount{
 		
 	}
 
+	
+
 	public static function connection(){
-		
-		if(!empty($_POST['pass']) && !empty($_POST['name'])){
+		/*echo var_dump("connection");*/
+		if(empty($_POST['pass']) === false && empty($_POST['name']) === false){
 			$pass = hash('sha256', $_POST['pass']);
 			$name = $_POST['name'];
 			$userManager = new Modal\UserManager();
@@ -91,6 +95,12 @@ class ControllerAccount{
 
 	}
 
+
+	public function disconnect(){
+		session_destroy();
+		header('location:/');
+	}
+
 	public static function editProfile(){
 		$userManager = new Modal\UserManager();
 		if(!empty($_GET['subAction'])){
@@ -113,3 +123,6 @@ class ControllerAccount{
 
 
 }
+
+
+
