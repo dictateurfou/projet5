@@ -129,7 +129,7 @@ class UserManager extends Manager{
 		/*check action right*/
 		$i = 0;
 		while($i < count($right)){
-			if(array_key_exists($right[$i]['action'], $actionRight)){
+			if(array_key_exists($right[$i]['action'], $actionRight) === true){
 				$actionRight[$right[$i]['action']] = true;
 			}
 			$i++;
