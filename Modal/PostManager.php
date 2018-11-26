@@ -2,7 +2,6 @@
 
 namespace Modal;
 use PDO;
-use \Entity\Utils;
 
 class PostManager extends Manager{
 
