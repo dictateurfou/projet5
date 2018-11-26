@@ -7,7 +7,7 @@ class PostManager extends Manager{
 
 	public function viewAll(){
 		$utils = new \Entity\Utils();
-		$post = $utils->getObjectInObject("post",["author"=>'user']);
+		$post = $utils->getObjectInObject("post",["author"=>'user'],"ORDER by post.id DESC");
 		return $post;		
 	}
 
@@ -33,6 +33,11 @@ class PostManager extends Manager{
 		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
 		$stmt->bindParam(':author',$author, PDO::PARAM_INT);
 		$stmt->execute();
+
+		$stmt2 = $cnx->prepare("SELECT MAX(id) FROM post");
+		$stmt2->execute();
+		$number = $stmt2->fetchAll();
+		header('Location: /post/view/'.$number[0][0]);
 	}
 
 	public function edit($title,$content,$id,$image = null){

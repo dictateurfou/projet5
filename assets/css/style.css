@@ -65,3 +65,15 @@
 #info{
 	text-align:center;
 }
+
+.comment-list{
+	border-bottom:1px solid black;
+}
+
+.info-comment{
+	font-size:0.8em;
+}
+
+ul{
+	list-style-type: none;
+}
