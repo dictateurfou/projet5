@@ -2,7 +2,7 @@
 namespace Controller;
 /*for twig component*/
 require_once("vendor/autoload.php");
-use \Twig_Loader_Filesystem;
+use function \Twig_Loader_Filesystem;
 class Controller{
 	private $vue;
 	private $controller;
