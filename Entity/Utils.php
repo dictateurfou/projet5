@@ -4,7 +4,6 @@ use PDO;
 use \Modal\Manager;
 class Utils extends Manager
 {
-	/*
 	public function getObjectInObject(string $object,array $subObject,string $cond = null,$param = null){
 		$class = '\Entity\\'.ucfirst($object);
 		$request = "SELECT ".$object.".*,";
@@ -81,14 +80,12 @@ class Utils extends Manager
 			$objectTab = false;
 		}
 		return $objectTab;
-		*/
 		/*foreach ($donnees as $key => $value){
 			$method = 'set'.ucfirst($key);
 			if (method_exists($this, $method)){
 			  $this->$method($value);
 			}
 		}
-
 */
 		/*$stmt = $cnx->prepare("SELECT comment.*,users.name as authorName FROM comment INNER JOIN users ON comment.author = users.id");*/
 		/*while($i < count($subObject)){
