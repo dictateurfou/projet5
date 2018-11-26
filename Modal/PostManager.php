@@ -6,34 +6,38 @@ use PDO;
 class PostManager extends Manager{
 
 	public function viewAll(){
-		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("SELECT * FROM post");
-		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\Post');
-		$post = $stmt->fetchAll();
-		return $post;
-				
+		$utils = new \Entity\Utils();
+		$post = $utils->getObjectInObject("post",["author"=>'user'],"ORDER by post.id DESC");
+		return $post;		
 	}
 
 	public function view($id){
-		$cnx = $this->cnx();
-		$stmt = $cnx->prepare("SELECT * FROM post WHERE id = :id");
-		$stmt->bindParam(':id',$id, PDO::PARAM_INT);
-		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\Post');
-		$post = $stmt->fetch();
+		$utils = new \Entity\Utils();
+		$post = $utils->getObjectInObject("post",["author"=>'user'],"WHERE post.id = :id",[":id" => $id]);
+		if($post !== false){
+			$post = $post[0];
+		}
+
 		return $post;
+
 	}
 
 	public function addPost($title,$image,$content){
+		$author = $_SESSION['user']->getId();
 		$cnx = $this->cnx();
 		$date = date('Y-m-d h:m:s');
-		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,'test',NOW(),NOW())");
+		$stmt = $cnx->prepare("INSERT INTO `post`(`title`, `image`, `content`, `author`, `createdAt`, `editedAt`) VALUES (:title,:image,:content,:author,NOW(),NOW())");
 
 		$stmt->bindParam(':title',$title, PDO::PARAM_STR);
 		$stmt->bindParam(':image',$image, PDO::PARAM_STR);
 		$stmt->bindParam(':content',$content, PDO::PARAM_STR);
+		$stmt->bindParam(':author',$author, PDO::PARAM_INT);
 		$stmt->execute();
+
+		$stmt2 = $cnx->prepare("SELECT MAX(id) FROM post");
+		$stmt2->execute();
+		$number = $stmt2->fetchAll();
+		header('Location: /post/view/'.$number[0][0]);
 	}
 
 	public function edit($title,$content,$id,$image = null){
