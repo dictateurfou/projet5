@@ -80,30 +80,5 @@ class Utils extends Manager
 			$objectTab = false;
 		}
 		return $objectTab;
-		/*foreach ($donnees as $key => $value){
-			$method = 'set'.ucfirst($key);
-			if (method_exists($this, $method)){
-			  $this->$method($value);
-			}
-		}
-*/
-		/*$stmt = $cnx->prepare("SELECT comment.*,users.name as authorName FROM comment INNER JOIN users ON comment.author = users.id");*/
-		/*while($i < count($subObject)){
-			$allias = 
-			$i++;
-		}*/
-		/*
-		$i = 0;
-		while($i < count($donnees)){
-			 
-			$entity = new $object();
-			foreach ($donnees as $key => $value){
-				$method = 'set'.ucfirst($key);
-				if (method_exists($this, $method)){
-				  $this->$method($value);
-				}
-			}
-		$i++;
-		}*/
 	}
 }
