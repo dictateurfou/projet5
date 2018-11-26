@@ -176,6 +176,9 @@ class Controller{
 				if($urlExplode[0] == "adminPanel"){
 					$this->vue = "defaut";
 				}
+				else{
+					$this->vue = $urlExplode[0].'/defaut';
+				}
 			}
 			else{
 				$result = $className::$methodName();
