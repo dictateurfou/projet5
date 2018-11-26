@@ -1,7 +1,6 @@
 <?php
 namespace Modal;
 use PDO;
-use \Modal\Manager;
 
 class UserManager extends Manager{
 
