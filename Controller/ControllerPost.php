@@ -1,19 +1,15 @@
 <?php
-
 /*LOAD ROUTE ACTION*/
-
 $controller->addAction('viewAll',false,false);
 $controller->addAction("view/id",false,false);
 $controller->addAction('addPost',true,true);
 $controller->addAction('edit/id',true,true);
 $controller->addAction('delete/id',true,true);
-
 class ControllerPost{
  	public static function viewAll(){
 		$postManager = new \Modal\PostManager();
  		return ["articles" => $postManager->viewAll()];
  	}
-
  	public static function view(){
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
@@ -23,11 +19,9 @@ class ControllerPost{
  			/*créer une redirection page 404*/
  		}
  	}
-
  	public static function addPost(){
  		if(array_key_exists('image', $_FILES)){
  			$image = new \Entity\File($_FILES['image']);
-
 	 		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 0 && $image->checkValidExtension(array('jpg','jpeg','png'))){
 	 			$name = md5(uniqid(rand(), true)).'.'.$image->checkType();
 	 			$target = 'post/'.$name;
@@ -35,14 +29,11 @@ class ControllerPost{
 	 			$postManager = new \Modal\PostManager();
 	 			/* mettre post en objet */
 	 			$postManager->addPost($_POST['title'],$target,$_POST['content']);
-
 	 		}
 	 	}
  	}
-
  	public static function edit(){
  		$postManager = new \Modal\PostManager();
-
  		if(!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 4 && !empty($_GET['id'])){
  			$postManager->edit($_POST['title'],$_POST['content'],$_GET['id']);
  		}
@@ -66,7 +57,6 @@ class ControllerPost{
  				}
  				else{
  					/* redirect post inconnu */
-
  				}
  			}
  			else{
@@ -74,7 +64,6 @@ class ControllerPost{
  			}
  		}
  	}
-
  	public static function delete(){
  		if(array_key_exists('id', $_GET)){
  			$postManager = new \Modal\PostManager();
@@ -82,5 +71,4 @@ class ControllerPost{
  			header('Location: /index.php?post&action=viewAll');
  		}
  	}
-
 }
