@@ -18,7 +18,7 @@ abstract class Manager{
 
 	protected function cnx(){
 		try {
-			$dbh = new PDO($this->dsn, $this->user, $this->pass);
+			$dbh = new \PDO($this->dsn, $this->user, $this->pass);
 		} catch (PDOException $e) {
 		    echo 'Connexion échouée : ' . $e->getMessage();
 		}
