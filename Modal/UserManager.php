@@ -14,7 +14,7 @@ class UserManager extends Manager{
 		$stmt->bindParam(':name', $name);
 		$stmt->bindParam(':mail',$mail);
 		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS || PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$test = $stmt->fetch();
 		
 
@@ -45,7 +45,7 @@ class UserManager extends Manager{
 		$stmt = $cnx->prepare("SELECT * FROM user WHERE id = :id");
 		$stmt->bindParam(':id', $id);
 		$stmt->execute();
-		$stmt->setFetchMode(PDO::FETCH_CLASS || PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$user = $stmt->fetch();
 
 		return $user;
@@ -57,7 +57,7 @@ class UserManager extends Manager{
 		$stmt = $cnx->prepare("SELECT * FROM user WHERE name = :name AND pass = :pass");
 		$stmt->bindParam(':name', $name);
 		$stmt->bindParam(':pass',$pass);
-		$stmt->setFetchMode(PDO::FETCH_CLASS || PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$user = $stmt->fetch();
 		if($user !== false and $user->getValidate() == 'yes'){
@@ -85,7 +85,7 @@ class UserManager extends Manager{
 	public function accountInvalid(){
 		$cnx = $this->cnx();
 		$stmt = $cnx->prepare("SELECT * FROM user WHERE validate = 'no'");
-		$stmt->setFetchMode(PDO::FETCH_CLASS || PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
 		$stmt->execute();
 		$users = $stmt->fetchAll();
 		
