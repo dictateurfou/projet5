@@ -1,6 +1,7 @@
 <?php
 namespace Modal;
 use PDO;
+use PDOException;
 abstract class Manager{
 
 	private $dsn;
