@@ -51,7 +51,24 @@ class UserManager extends Manager{
 		return $user;
 	}
 
+	public function connect($name,$pass){
+		$cnx = $this->cnx();
 
+		$stmt = $cnx->prepare("SELECT * FROM user WHERE name = :name AND pass = :pass");
+		$stmt->bindParam(':name', $name);
+		$stmt->bindParam(':pass',$pass);
+		$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Entity\User');
+		$stmt->execute();
+		$user = $stmt->fetch();
+		if($user !== false && $user->getValidate() == 'yes'){
+			$_SESSION['id'] = $user->getId();
+			$_SESSION['user'] = $user;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	public function validate($bool,$id){
 		$request = "UPDATE user SET validate = 'refused' WHERE id = :id";
