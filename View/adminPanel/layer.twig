@@ -1,45 +1,26 @@
 
 <html lang="fr">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>Bootstrap 3 Admin</title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="/assets/adminPanel/css/theme.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link href="/assets/adminPanel/css/styles.css" rel="stylesheet">
-	</head>
-	<body>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Bootstrap 3 Admin</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="/assets/adminPanel/css/theme.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="/assets/adminPanel/css/styles.css" rel="stylesheet">
+    </head>
+    <body>
 
 
 <!-- Main -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
-            <!-- Left column -->
-            <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> Tools</strong></a>
-
-            <hr>
-
-            <ul class="nav nav-stacked">
-                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Administration <i class="glyphicon glyphicon-chevron-down"></i></a>
-                    <ul class="nav nav-stacked collapse in" id="userMenu">
-                        <li class="active"> <a href="/adminPanel/accountValidation"><i class="glyphicon glyphicon-user"></i> Account</a></li>
-                        <li><a href="/adminPanel/addPost"><i class="glyphicon glyphicon-book"></i> Post</a></li>
-                        <li><a href="/adminPanel/commentValidation"><i class="glyphicon glyphicon-comment"></i> Commentaire</a></li>
-                        
-                    </ul>
-                </li>
-            </ul>
-
-           
-        </div>
-        <!-- /col-3 -->
+        
+        {% include menu only %}
         <div class="col-sm-9">
-
             <!-- column 2 -->
             <ul class="list-inline pull-right">
                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
@@ -90,10 +71,10 @@
 </div>
 
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	    <!-- Custom scripts for this template -->
-	     <script src="/assets/adminPanel/js/theme.min.js"></script>
-	    <!-- My custom script -->
-	    <script src="/assets/adminPanel/js/scripts.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Custom scripts for this template -->
+         <script src="/assets/adminPanel/js/theme.min.js"></script>
+        <!-- My custom script -->
+        <script src="/assets/adminPanel/js/scripts.js" type="text/javascript"></script>
     </body>
 </html>
