@@ -1,5 +1,5 @@
 <?php
-namespace Modal;
+namespace Manager;
 
 use PDO;
 use \Entity\User;

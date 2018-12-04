@@ -15,7 +15,7 @@ class ControllerAdminPanel
 
     public static function accountValidation()
     {
-        $userManager = new Modal\UserManager();
+        $userManager = new Manager\UserManager();
         if (empty($_GET['id']) !== true && empty($_GET['state']) !== true) {
             $id = $_GET["id"];
             $state = $_GET["state"];
@@ -32,7 +32,7 @@ class ControllerAdminPanel
                 $name = md5(uniqid(rand(), true)).'.'.$image->checkType();
                 $target = 'post/'.$name;
                 $image->changeFolder($target);
-                $postManager = new \Modal\PostManager();
+                $postManager = new \Manager\PostManager();
                 /* mettre post en objet */
                 $postManager->addPost($_POST['title'], $target, $_POST['content']);
             }
@@ -41,7 +41,7 @@ class ControllerAdminPanel
 
     public static function commentValidation()
     {
-        $commentManager = new Modal\CommentManager();
+        $commentManager = new Manager\CommentManager();
         if (empty($_GET['id']) !== true && empty($_GET['state']) !== true) {
             $id = $_GET["id"];
             $state = $_GET["state"];

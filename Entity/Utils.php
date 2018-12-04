@@ -2,7 +2,7 @@
 namespace Entity;
 
 use PDO;
-use \Modal\Manager;
+use \Manager\Manager;
 
 class Utils extends Manager
 {

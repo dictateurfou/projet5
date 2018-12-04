@@ -12,15 +12,15 @@ class ControllerPost
 {
     public static function viewAll()
     {
-        $postManager = new \Modal\PostManager();
+        $postManager = new \Manager\PostManager();
         return ["articles" => $postManager->viewAll()];
     }
 
     public static function view()
     {
         if (array_key_exists('id', $_GET)) {
-            $postManager = new \Modal\PostManager();
-            $commentManager = new \Modal\CommentManager();
+            $postManager = new \Manager\PostManager();
+            $commentManager = new \Manager\CommentManager();
             $article = $postManager->view($_GET['id']);
             if ($article !== false) {
                 $test = ["header" => ["view" => "header/post.twig","article" => $article,"user"=> $article->getAuthor()->getName()],
@@ -31,7 +31,7 @@ class ControllerPost
                 header('Location: /index.php');
             }
         } else {
-            /*créer une redirection page 404*/
+            header('Location: /index.php');
         }
     }
 
@@ -39,7 +39,7 @@ class ControllerPost
     public static function addComment()
     {
         if (!empty($_POST['content'])) {
-            $commentManager = new \Modal\CommentManager();
+            $commentManager = new \Manager\CommentManager();
             $commentManager->addComment($_GET['post'], $_SESSION['id'], $_POST['content']);
             header('Location: /post/view/'.$_GET['post']);
         }
@@ -47,7 +47,7 @@ class ControllerPost
 
     public static function edit()
     {
-        $postManager = new \Modal\PostManager();
+        $postManager = new \Manager\PostManager();
 
         if (!empty($_POST['title']) && !empty($_POST['content']) && $_FILES['image']['error'] == 4 && !empty($_GET['id'])) {
             $postManager->edit($_POST['title'], $_POST['content'], $_GET['id']);
@@ -80,7 +80,7 @@ class ControllerPost
     public static function delete()
     {
         if (array_key_exists('id', $_GET)) {
-            $postManager = new \Modal\PostManager();
+            $postManager = new \Manager\PostManager();
             $postManager->delete($_GET['id']);
             header('Location: /index.php?post&action=viewAll');
         }

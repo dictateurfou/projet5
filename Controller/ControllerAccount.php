@@ -53,7 +53,7 @@ class ControllerAccount
             }
 
             if (count($error) == 0) {
-                $userManager = new Modal\UserManager();
+                $userManager = new Manager\UserManager();
                 $pass = hash('sha256', $_POST['pass']);
                 return ["error" => [$userManager->addUser($name, $mail, $pass)]];
             } else {
@@ -70,7 +70,7 @@ class ControllerAccount
         if (empty($_POST['pass']) === false && empty($_POST['name']) === false) {
             $pass = hash('sha256', $_POST['pass']);
             $name = $_POST['name'];
-            $userManager = new Modal\UserManager();
+            $userManager = new Manager\UserManager();
             $verif = $userManager->connect($name, $pass);
             if ($verif) {
                 header('Location: /');
@@ -82,7 +82,7 @@ class ControllerAccount
 
     public static function validation()
     {
-        $userManager = new Modal\UserManager();
+        $userManager = new Manager\UserManager();
         if (!empty($_GET['id']) && !empty($_GET['state'])) {
             $id = $_GET["id"];
             $state = $_GET["state"];
@@ -104,7 +104,7 @@ class ControllerAccount
 
     public static function editProfile()
     {
-        $userManager = new Modal\UserManager();
+        $userManager = new Manager\UserManager();
         if (!empty($_GET['subAction'])) {
             $action = $_GET['subAction'];
             if ($action == "delete") {

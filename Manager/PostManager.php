@@ -1,6 +1,6 @@
 <?php
 
-namespace Modal;
+namespace Manager;
 
 use PDO;
 

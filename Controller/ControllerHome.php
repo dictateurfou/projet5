@@ -41,7 +41,7 @@ class ControllerHome
             $result = $mailer->send($message);
         }
 
-        return ["header" => ["view" => "header/default.twig","title" => "Hervy Steven","subtitle" => $presentation,"img" => "/assets/img/home-bg.png"]];
+        return ["header" => ["view" => "header/default.twig","title" => "Hervy Steven","subtitle" => $presentation,"img" => "/assets/img/home-bg.jpg"]];
     }
 
     public static function mail()

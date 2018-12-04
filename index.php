@@ -7,7 +7,7 @@
     /*$loader->addNamespace('Blog\Administration', 'src/Blog/Administration/Classes/');*/
     $loader->addNamespace('Entity', 'Entity/');
     $loader->addNamespace('Controller', 'Controller/');
-    $loader->addNamespace('Modal', 'Manager/');
+    $loader->addNamespace('Manager', 'Manager/');
 
     $controller = new \Controller\Controller();
 

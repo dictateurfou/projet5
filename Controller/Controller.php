@@ -75,7 +75,7 @@ class Controller
 
     private function setMenu($routeName)
     {
-        $userManager = new \Modal\UserManager();
+        $userManager = new \Manager\UserManager();
         if($routeName !== "adminPanel"){
             if (array_key_exists('id', $_SESSION) === true) {
                 if ($userManager->userHaveRight("adminPanel", '') === true) {
@@ -91,7 +91,7 @@ class Controller
     }
 
     private function checkAuth($action){
-        $userManager = new \Modal\UserManager();
+        $userManager = new \Manager\UserManager();
         $passed = true;
 
         /* si connecter on rafraichi l'user en bdd */
@@ -144,7 +144,6 @@ class Controller
     private function checkAction()
     {
         $actionOffset = 1;
-        $actionIndex;
         $defautAction = false;
         $data = ["passed" => false,"className" => "\Controller\\".$this->controller,"methodName" => "defaut"];
         if (array_key_exists($actionOffset, $this->urlExplode) === false) {
@@ -181,10 +180,10 @@ class Controller
                     if ($defautAction == false) {
                         $data["methodName"] = $this->action[$i]["name"];
                         $this->vue = $this->vue.$this->action[$i]["name"];
-                        $actionIndex = $i;
+                        $data["actionIndex"] = $i;
                     } else {
                         $this->vue = $this->vue.$this->action[$i]["name"];
-                        $actionIndex = $i;
+                        $data["actionIndex"] = $i;
                     }
                     $data["passed"] = $this->checkAuth($this->action[$i]);
 
@@ -198,7 +197,7 @@ class Controller
     public function render()
     {
         $find = false;
-        $userManager = new \Modal\UserManager();
+        $userManager = new \Manager\UserManager();
 
         $checkAction = $this->checkAction();
         $find = $checkAction["passed"];
@@ -213,7 +212,7 @@ class Controller
             /*si on doit rajouter une aplication rajouter une condition*/
             if ($this->urlExplode[0] == "adminPanel") {
                 if ($this->vue !== "/defaut") {
-                    $this->vue = $this->action[$actionIndex]["name"];
+                    $this->vue = $this->action[$checkAction["actionIndex"]]["name"];
                 }
                 $loaderTwig = new \Twig_Loader_Filesystem('./View/adminPanel');
                 $twig = new \Twig_Environment($loaderTwig);
